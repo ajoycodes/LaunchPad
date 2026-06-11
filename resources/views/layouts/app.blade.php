@@ -22,6 +22,8 @@
     @stack('head')
 </head>
 <body>
+    @include('partials.navbar')
+
     <main class="site-main">
         @yield('content')
     </main>

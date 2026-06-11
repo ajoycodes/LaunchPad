@@ -20,8 +20,15 @@ class User extends Authenticatable
      */
     protected $fillable = [
         'name',
+        'username',
         'email',
         'password',
+        'role',
+        'avatar',
+        'bio',
+        'website',
+        'twitter',
+        'is_banned',
     ];
 
     /**
@@ -44,6 +51,23 @@ class User extends Authenticatable
         return [
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
+            'is_banned' => 'boolean',
         ];
+    }
+
+    /**
+     * Determine if the user is an administrator.
+     */
+    public function isAdmin(): bool
+    {
+        return $this->role === 'admin';
+    }
+
+    /**
+     * Determine if the user is a maker.
+     */
+    public function isMaker(): bool
+    {
+        return $this->role === 'maker';
     }
 }

@@ -224,3 +224,45 @@ a:hover {
   color: var(--color-text-muted);
   font-size: .85rem;
 }
+
+/* ==========================================================================
+   Home — placeholder hero
+   ========================================================================== */
+
+.home-hero {
+  text-align: center;
+  padding-block: var(--space-8);
+}
+
+.home-hero__eyebrow {
+  display: inline-block;
+  background-color: var(--color-accent-soft);
+  color: var(--color-accent);
+  font-weight: 600;
+  font-size: .85rem;
+  padding: var(--space-1) var(--space-3);
+  border-radius: var(--radius-full);
+  margin-bottom: var(--space-4);
+}
+
+.home-hero__title {
+  font-size: clamp(2rem, 5vw, 3rem);
+  font-weight: 800;
+  max-width: 720px;
+  margin: 0 auto var(--space-4);
+}
+
+.home-hero__subtitle {
+  max-width: 560px;
+  margin: 0 auto var(--space-6);
+  color: var(--color-text-body);
+  font-size: 1.05rem;
+  line-height: 1.6;
+}
+
+.home-hero__actions {
+  display: flex;
+  gap: var(--space-3);
+  justify-content: center;
+  flex-wrap: wrap;
+}

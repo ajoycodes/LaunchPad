@@ -1,0 +1,81 @@
+/* ==========================================================================
+   Base — applies design tokens to the document
+   ========================================================================== */
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  color: var(--color-text-body);
+  background-color: var(--color-bg);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  color: var(--color-text-primary);
+  font-weight: 700;
+  line-height: 1.2;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+a:hover {
+  color: var(--color-accent);
+}
+
+.site-main {
+  min-height: calc(100vh - 64px);
+}
+
+/* Layout container shared across pages */
+.container-app {
+  max-width: var(--container-max);
+  margin-inline: auto;
+  padding: var(--container-pad);
+  width: 100%;
+}
+
+/* Primary (coral) button shared style */
+.btn-accent {
+  background-color: var(--color-accent);
+  border: 1.5px solid var(--color-accent);
+  color: #fff;
+  font-weight: 600;
+  border-radius: var(--radius-md);
+  padding: var(--space-2) var(--space-4);
+  transition: background-color .15s ease, border-color .15s ease;
+}
+
+.btn-accent:hover,
+.btn-accent:focus {
+  background-color: var(--color-accent-hover);
+  border-color: var(--color-accent-hover);
+  color: #fff;
+}
+
+.btn-ghost {
+  background: transparent;
+  border: 1.5px solid var(--color-border);
+  color: var(--color-text-primary);
+  font-weight: 600;
+  border-radius: var(--radius-md);
+  padding: var(--space-2) var(--space-4);
+  transition: border-color .15s ease, color .15s ease;
+}
+
+.btn-ghost:hover,
+.btn-ghost:focus {
+  border-color: var(--color-accent);
+  color: var(--color-accent);
+}

@@ -408,3 +408,105 @@ a:hover {
   justify-content: center;
   flex-wrap: wrap;
 }
+
+/* ==========================================================================
+   Submit / Edit product form
+   ========================================================================== */
+
+.submit-wrap {
+  max-width: 720px;
+  margin-inline: auto;
+  padding-block: var(--space-7);
+}
+
+.submit-header {
+  margin-bottom: var(--space-6);
+}
+
+.submit-header__title {
+  font-size: 1.75rem;
+  margin: 0 0 var(--space-2);
+}
+
+.submit-header__sub {
+  color: var(--color-text-muted);
+  margin: 0;
+}
+
+.submit-card {
+  background: var(--color-bg);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-sm);
+  padding: var(--space-6);
+  margin-bottom: var(--space-5);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+
+.submit-card__heading {
+  font-size: 1.1rem;
+  margin: 0 0 var(--space-1);
+  padding-bottom: var(--space-3);
+  border-bottom: 1px solid var(--color-border);
+}
+
+.submit-card .form-field input[type="text"],
+.submit-card .form-field input[type="url"],
+.submit-card .form-field input[type="date"],
+.submit-card .form-field select,
+.submit-card .form-field textarea {
+  border: 1.5px solid var(--color-border);
+  border-radius: var(--radius-md);
+  padding: var(--space-2) var(--space-3);
+  font-size: .95rem;
+  font-family: inherit;
+  color: var(--color-text-primary);
+  background-color: var(--color-bg);
+  width: 100%;
+  transition: border-color .15s ease;
+}
+
+.submit-card .form-field select {
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%239A9A9A' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right var(--space-3) center;
+  padding-right: var(--space-6);
+  cursor: pointer;
+}
+
+.submit-card .form-field textarea {
+  resize: vertical;
+  min-height: 140px;
+}
+
+.submit-card .form-field input:focus,
+.submit-card .form-field select:focus,
+.submit-card .form-field textarea:focus {
+  outline: none;
+  border-color: var(--color-accent);
+}
+
+.form-hint {
+  font-size: .8rem;
+  color: var(--color-text-muted);
+}
+
+.required {
+  color: var(--color-accent);
+}
+
+.submit-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: var(--space-3);
+  margin-top: var(--space-2);
+}
+
+.submit-actions .btn-accent {
+  padding: var(--space-3) var(--space-6);
+  font-size: 1rem;
+  cursor: pointer;
+}

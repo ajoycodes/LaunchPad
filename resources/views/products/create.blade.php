@@ -70,6 +70,26 @@
                 @error('tags')<span class="form-error">{{ $message }}</span>@enderror
             </div>
 
+            {{-- ── Section 3: Logo Upload ────────────────────────────────────── --}}
+            <div class="submit-card">
+                <h2 class="submit-card__heading">Logo</h2>
+
+                <div class="logo-upload">
+                    <div class="logo-upload__preview" id="logoPreview">
+                        <span class="logo-upload__placeholder">🚀</span>
+                    </div>
+                    <div class="logo-upload__controls">
+                        <label class="btn-ghost btn-sm" for="logo" style="cursor:pointer;">
+                            Choose image
+                        </label>
+                        <input type="file" id="logo" name="logo" accept="image/*"
+                               style="display:none;" aria-label="Upload logo">
+                        <span class="form-hint">PNG, JPG or WebP · max 2 MB · square works best</span>
+                        @error('logo')<span class="form-error">{{ $message }}</span>@enderror
+                    </div>
+                </div>
+            </div>
+
         </form>
     </div>
 </div>
@@ -90,6 +110,25 @@
                 checkboxes.forEach(c => c.disabled = false);
             }
         });
+    });
+}());
+
+// Logo preview
+(function () {
+    const input   = document.getElementById('logo');
+    const preview = document.getElementById('logoPreview');
+
+    if (!input || !preview) return;
+
+    input.addEventListener('change', () => {
+        const file = input.files[0];
+        if (!file) return;
+
+        const reader = new FileReader();
+        reader.onload = e => {
+            preview.innerHTML = `<img src="${e.target.result}" alt="Logo preview">`;
+        };
+        reader.readAsDataURL(file);
     });
 }());
 </script>

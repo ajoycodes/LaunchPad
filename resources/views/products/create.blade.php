@@ -54,7 +54,43 @@
                 </div>
             </div>
 
+            {{-- ── Section 2: Tags ──────────────────────────────────────────── --}}
+            <div class="submit-card">
+                <h2 class="submit-card__heading">Tags <span class="form-hint">(pick up to 5)</span></h2>
+
+                <div class="tag-grid">
+                    @foreach($tags as $tag)
+                        <label class="tag-option">
+                            <input type="checkbox" name="tags[]" value="{{ $tag->id }}"
+                                   @checked(in_array($tag->id, old('tags', [])))>
+                            <span class="tag-option__label">{{ $tag->name }}</span>
+                        </label>
+                    @endforeach
+                </div>
+                @error('tags')<span class="form-error">{{ $message }}</span>@enderror
+            </div>
+
         </form>
     </div>
 </div>
 @endsection
+
+@push('scripts')
+<script>
+(function () {
+    const checkboxes = document.querySelectorAll('input[name="tags[]"]');
+    const max = 5;
+
+    checkboxes.forEach(cb => {
+        cb.addEventListener('change', () => {
+            const checked = document.querySelectorAll('input[name="tags[]"]:checked');
+            if (checked.length >= max) {
+                checkboxes.forEach(c => { if (!c.checked) c.disabled = true; });
+            } else {
+                checkboxes.forEach(c => c.disabled = false);
+            }
+        });
+    });
+}());
+</script>
+@endpush

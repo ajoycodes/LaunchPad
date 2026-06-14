@@ -70,7 +70,25 @@
                 @error('tags')<span class="form-error">{{ $message }}</span>@enderror
             </div>
 
-            {{-- ── Section 3: Logo Upload ────────────────────────────────────── --}}
+            {{-- ── Section 3: Screenshots ───────────────────────────────────── --}}
+            <div class="submit-card">
+                <h2 class="submit-card__heading">Screenshots <span class="form-hint">(up to 5)</span></h2>
+
+                <div class="screenshot-upload">
+                    <label class="screenshot-upload__dropzone" for="screenshots" id="screenshotDropzone">
+                        <span class="screenshot-upload__icon">🖼️</span>
+                        <span>Click to add screenshots</span>
+                        <span class="form-hint">PNG, JPG or WebP · max 4 MB each</span>
+                        <input type="file" id="screenshots" name="screenshots[]"
+                               accept="image/*" multiple style="display:none;" aria-label="Upload screenshots">
+                    </label>
+                    <div class="screenshot-preview-grid" id="screenshotPreviews"></div>
+                </div>
+                @error('screenshots')<span class="form-error">{{ $message }}</span>@enderror
+                @error('screenshots.*')<span class="form-error">{{ $message }}</span>@enderror
+            </div>
+
+            {{-- ── Section 5: Logo Upload ────────────────────────────────────── --}}
             <div class="submit-card">
                 <h2 class="submit-card__heading">Logo</h2>
 
@@ -110,6 +128,35 @@
                 checkboxes.forEach(c => c.disabled = false);
             }
         });
+    });
+}());
+
+// Screenshot upload previews
+(function () {
+    const input   = document.getElementById('screenshots');
+    const grid    = document.getElementById('screenshotPreviews');
+    const zone    = document.getElementById('screenshotDropzone');
+    const max     = 5;
+
+    if (!input || !grid) return;
+
+    input.addEventListener('change', () => {
+        grid.innerHTML = '';
+        const files = Array.from(input.files).slice(0, max);
+
+        files.forEach(file => {
+            const reader = new FileReader();
+            reader.onload = e => {
+                const thumb = document.createElement('div');
+                thumb.className = 'screenshot-thumb';
+                thumb.innerHTML = `<img src="${e.target.result}" alt="">`;
+                grid.appendChild(thumb);
+            };
+            reader.readAsDataURL(file);
+        });
+
+        zone.querySelector('span:first-of-type').textContent =
+            files.length ? `${files.length} image${files.length > 1 ? 's' : ''} selected` : 'Click to add screenshots';
     });
 }());
 

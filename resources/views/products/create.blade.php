@@ -108,6 +108,83 @@
                 </div>
             </div>
 
+            {{-- ── Section 6: External Links ─────────────────────────────────── --}}
+            <div class="submit-card">
+                <h2 class="submit-card__heading">Links <span class="form-hint">(all optional)</span></h2>
+
+                <div class="form-field">
+                    <label for="website_url">Website</label>
+                    <input type="url" id="website_url" name="website_url"
+                           value="{{ old('website_url') }}" placeholder="https://yourproduct.com">
+                    @error('website_url')<span class="form-error">{{ $message }}</span>@enderror
+                </div>
+
+                <div class="form-field">
+                    <label for="demo_url">Live demo</label>
+                    <input type="url" id="demo_url" name="demo_url"
+                           value="{{ old('demo_url') }}" placeholder="https://demo.yourproduct.com">
+                    @error('demo_url')<span class="form-error">{{ $message }}</span>@enderror
+                </div>
+
+                <div class="form-field">
+                    <label for="github_url">GitHub repo</label>
+                    <input type="url" id="github_url" name="github_url"
+                           value="{{ old('github_url') }}" placeholder="https://github.com/you/repo">
+                    @error('github_url')<span class="form-error">{{ $message }}</span>@enderror
+                </div>
+            </div>
+
+            {{-- ── Section 7: Launch & Settings ─────────────────────────────── --}}
+            <div class="submit-card">
+                <h2 class="submit-card__heading">Launch &amp; Settings</h2>
+
+                <div class="form-field">
+                    <span class="form-label">Launch timing</span>
+                    <div class="launch-options">
+                        <label class="launch-option">
+                            <input type="radio" name="launch_type" value="now"
+                                   @checked(old('launch_type', 'now') === 'now')>
+                            <span class="launch-option__body">
+                                <strong>Launch today</strong>
+                                <small>Goes live immediately after review</small>
+                            </span>
+                        </label>
+                        <label class="launch-option">
+                            <input type="radio" name="launch_type" value="scheduled"
+                                   @checked(old('launch_type') === 'scheduled')>
+                            <span class="launch-option__body">
+                                <strong>Schedule a date</strong>
+                                <small>Pick a future launch date</small>
+                            </span>
+                        </label>
+                    </div>
+                    <div class="form-field" id="launchDateWrap" style="display:none; margin-top:var(--space-3);">
+                        <label for="launch_date">Launch date</label>
+                        <input type="date" id="launch_date" name="launch_date"
+                               value="{{ old('launch_date') }}" min="{{ now()->addDay()->toDateString() }}">
+                        @error('launch_date')<span class="form-error">{{ $message }}</span>@enderror
+                    </div>
+                </div>
+
+                <div class="form-field">
+                    <label class="toggle-switch">
+                        <input type="hidden" name="is_roast_enabled" value="0">
+                        <input type="checkbox" name="is_roast_enabled" value="1"
+                               @checked(old('is_roast_enabled'))>
+                        <span class="toggle-switch__track"></span>
+                        <span class="toggle-switch__label">
+                            Enable Roast Mode
+                            <small>Let the community give brutally honest feedback</small>
+                        </span>
+                    </label>
+                </div>
+            </div>
+
+            <div class="submit-actions">
+                <a href="{{ route('home') }}" class="btn-ghost">Cancel</a>
+                <button type="submit" class="btn-accent">Submit for Review</button>
+            </div>
+
         </form>
     </div>
 </div>
@@ -177,6 +254,22 @@
         };
         reader.readAsDataURL(file);
     });
+}());
+
+// Launch date toggle
+(function () {
+    const radios = document.querySelectorAll('input[name="launch_type"]');
+    const wrap   = document.getElementById('launchDateWrap');
+
+    if (!radios.length || !wrap) return;
+
+    function sync() {
+        const val = document.querySelector('input[name="launch_type"]:checked')?.value;
+        wrap.style.display = val === 'scheduled' ? 'block' : 'none';
+    }
+
+    radios.forEach(r => r.addEventListener('change', sync));
+    sync();
 }());
 </script>
 @endpush

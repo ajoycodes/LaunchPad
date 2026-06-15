@@ -634,3 +634,96 @@ a:hover {
   height: 100%;
   object-fit: cover;
 }
+
+/* Launch type radio cards */
+.launch-options {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-3);
+}
+
+.launch-option {
+  cursor: pointer;
+}
+
+.launch-option input[type="radio"] {
+  position: absolute;
+  opacity: 0;
+}
+
+.launch-option__body {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+  border: 1.5px solid var(--color-border);
+  border-radius: var(--radius-md);
+  padding: var(--space-3);
+  transition: border-color .12s ease, background-color .12s ease;
+}
+
+.launch-option__body small {
+  color: var(--color-text-muted);
+  font-size: .82rem;
+}
+
+.launch-option input:checked + .launch-option__body {
+  border-color: var(--color-accent);
+  background-color: var(--color-accent-soft);
+}
+
+/* Roast mode toggle switch */
+.toggle-switch {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  cursor: pointer;
+}
+
+.toggle-switch input[type="checkbox"] {
+  position: absolute;
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.toggle-switch__track {
+  position: relative;
+  width: 44px;
+  height: 24px;
+  background: var(--color-border);
+  border-radius: var(--radius-full);
+  flex-shrink: 0;
+  transition: background-color .15s ease;
+}
+
+.toggle-switch__track::after {
+  content: '';
+  position: absolute;
+  left: 3px;
+  top: 3px;
+  width: 18px;
+  height: 18px;
+  background: #fff;
+  border-radius: 50%;
+  transition: transform .15s ease;
+  box-shadow: var(--shadow-sm);
+}
+
+.toggle-switch input:checked ~ .toggle-switch__track {
+  background: var(--color-accent);
+}
+
+.toggle-switch input:checked ~ .toggle-switch__track::after {
+  transform: translateX(20px);
+}
+
+.toggle-switch__label {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.toggle-switch__label small {
+  color: var(--color-text-muted);
+  font-size: .82rem;
+}

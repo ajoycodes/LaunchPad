@@ -46,7 +46,7 @@
                         <option value="">Select a category…</option>
                         @foreach($categories as $cat)
                             <option value="{{ $cat->id }}" @selected(old('category_id') == $cat->id)>
-                                {{ $cat->icon }} {{ $cat->name }}
+                                {{ $cat->name }}
                             </option>
                         @endforeach
                     </select>
@@ -76,7 +76,7 @@
 
                 <div class="screenshot-upload">
                     <label class="screenshot-upload__dropzone" for="screenshots" id="screenshotDropzone">
-                        <span class="screenshot-upload__icon">🖼️</span>
+                        <i data-lucide="image-plus" class="screenshot-upload__icon"></i>
                         <span>Click to add screenshots</span>
                         <span class="form-hint">PNG, JPG or WebP · max 4 MB each</span>
                         <input type="file" id="screenshots" name="screenshots[]"
@@ -94,7 +94,7 @@
 
                 <div class="logo-upload">
                     <div class="logo-upload__preview" id="logoPreview">
-                        <span class="logo-upload__placeholder">🚀</span>
+                        <i data-lucide="image" class="logo-upload__placeholder"></i>
                     </div>
                     <div class="logo-upload__controls">
                         <label class="btn-ghost btn-sm" for="logo" style="cursor:pointer;">

@@ -12,13 +12,16 @@
                 @if($product->logo)
                     <img src="{{ Storage::url($product->logo) }}" alt="{{ $product->name }} logo">
                 @else
-                    <span class="product-header__logo-placeholder">🚀</span>
+                    <i data-lucide="box" class="product-header__logo-placeholder"></i>
                 @endif
             </div>
 
             <div class="product-header__info">
                 <div class="product-header__meta">
-                    <span class="product-header__category">{{ $product->category->icon }} {{ $product->category->name }}</span>
+                    <span class="product-header__category">
+                        <i data-lucide="{{ $product->category->icon }}" class="icon-inline"></i>
+                        {{ $product->category->name }}
+                    </span>
                     @if($product->status === 'pending')
                         <span class="product-status product-status--pending">Pending review</span>
                     @endif

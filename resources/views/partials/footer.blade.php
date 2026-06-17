@@ -1,7 +1,7 @@
 <footer class="site-footer">
   <div class="container-app site-footer__inner">
     <div class="site-footer__brand">
-      <span class="site-footer__logo">🚀 LaunchPad</span>
+      <span class="site-footer__logo"><i data-lucide="rocket" class="icon-inline"></i> LaunchPad</span>
       <p class="site-footer__tagline">Where makers launch and the community decides what wins.</p>
     </div>
 

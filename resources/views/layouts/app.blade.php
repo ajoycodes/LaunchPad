@@ -33,6 +33,11 @@
     {{-- Bootstrap 5 JS bundle (CDN) --}}
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 
+    {{-- Lucide icons --}}
+    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
+
     @stack('scripts')
+
+    <script>lucide.createIcons();</script>
 </body>
 </html>

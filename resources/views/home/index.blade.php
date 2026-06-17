@@ -4,7 +4,7 @@
 
 @section('content')
     <section class="home-hero container-app">
-        <span class="home-hero__eyebrow">🚀 Welcome to LaunchPad</span>
+        <span class="home-hero__eyebrow"><i data-lucide="rocket" class="icon-inline"></i> Welcome to LaunchPad</span>
         <h1 class="home-hero__title">Discover what makers are building today.</h1>
         <p class="home-hero__subtitle">
             Launch your product, collect upvotes, and get honest feedback from a

@@ -2,7 +2,7 @@
   <div class="container-app site-nav__inner">
     {{-- Logo (left) --}}
     <a href="{{ url('/') }}" class="site-nav__logo">
-      <span class="site-nav__logo-mark">🚀</span>
+      <i data-lucide="rocket" class="site-nav__logo-mark"></i>
       <span class="site-nav__logo-text">LaunchPad</span>
     </a>
 

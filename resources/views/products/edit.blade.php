@@ -46,7 +46,7 @@
                         <option value="">Select a category…</option>
                         @foreach($categories as $cat)
                             <option value="{{ $cat->id }}" @selected(old('category_id', $product->category_id) == $cat->id)>
-                                {{ $cat->icon }} {{ $cat->name }}
+                                {{ $cat->name }}
                             </option>
                         @endforeach
                     </select>
@@ -87,7 +87,7 @@
 
                 <div class="screenshot-upload">
                     <label class="screenshot-upload__dropzone" for="screenshots" id="screenshotDropzone">
-                        <span class="screenshot-upload__icon">🖼️</span>
+                        <i data-lucide="image-plus" class="screenshot-upload__icon"></i>
                         <span>Click to add more screenshots</span>
                         <span class="form-hint">PNG, JPG or WebP · max 4 MB each</span>
                         <input type="file" id="screenshots" name="screenshots[]"
@@ -107,7 +107,7 @@
                         @if($product->logo)
                             <img src="{{ Storage::url($product->logo) }}" alt="Current logo">
                         @else
-                            <span class="logo-upload__placeholder">🚀</span>
+                            <i data-lucide="image" class="logo-upload__placeholder"></i>
                         @endif
                     </div>
                     <div class="logo-upload__controls">

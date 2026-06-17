@@ -8,15 +8,25 @@
 <div class="feed-subheader">
     <div class="container-app feed-subheader__inner">
 
-        {{-- Tab bar --}}
-        <nav class="feed-tabs" aria-label="Time filter">
-            @foreach(['today' => 'Today', 'week' => 'This Week', 'alltime' => 'All Time'] as $key => $label)
-                <a href="{{ route('home', array_merge(request()->except('tab', 'page'), ['tab' => $key])) }}"
-                   class="feed-tab @if($tab === $key) active @endif">
-                    {{ $label }}
-                </a>
-            @endforeach
-        </nav>
+        {{-- Tab bar + submit CTA --}}
+        <div class="feed-tabs-row">
+            <nav class="feed-tabs" aria-label="Time filter">
+                @foreach(['today' => 'Today', 'week' => 'This Week', 'alltime' => 'All Time'] as $key => $label)
+                    <a href="{{ route('home', array_merge(request()->except('tab', 'page'), ['tab' => $key])) }}"
+                       class="feed-tab @if($tab === $key) active @endif">
+                        {{ $label }}
+                    </a>
+                @endforeach
+            </nav>
+
+            @auth
+                @if(auth()->user()->isMaker() || auth()->user()->isAdmin())
+                    <a href="{{ route('products.create') }}" class="btn-accent btn-sm">
+                        <i data-lucide="plus" class="icon-inline"></i> Submit
+                    </a>
+                @endif
+            @endauth
+        </div>
 
     </div>
 </div>

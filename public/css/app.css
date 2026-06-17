@@ -440,6 +440,44 @@ a:hover {
   color: var(--color-bg);
 }
 
+/* Category pills */
+.feed-categories {
+  display: flex;
+  gap: var(--space-2);
+  flex-wrap: wrap;
+}
+
+.feed-category-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-1);
+  padding: var(--space-1) var(--space-3);
+  border: 1.5px solid var(--color-border);
+  border-radius: var(--radius-full);
+  font-size: .8rem;
+  font-weight: 500;
+  color: var(--color-text-muted);
+  white-space: nowrap;
+  transition: border-color .12s ease, color .12s ease, background-color .12s ease;
+}
+
+.feed-category-pill .lucide {
+  width: 12px;
+  height: 12px;
+  stroke-width: 2;
+}
+
+.feed-category-pill:hover {
+  border-color: var(--color-accent);
+  color: var(--color-accent);
+}
+
+.feed-category-pill.active {
+  border-color: var(--color-accent);
+  background: var(--color-accent-soft);
+  color: var(--color-accent);
+}
+
 /* Main + sidebar layout */
 .feed-layout {
   display: grid;

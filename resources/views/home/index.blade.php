@@ -28,6 +28,21 @@
             @endauth
         </div>
 
+        {{-- Category pills --}}
+        <div class="feed-categories">
+            <a href="{{ route('home', request()->except('category', 'page')) }}"
+               class="feed-category-pill @if(!$catSlug) active @endif">
+                All
+            </a>
+            @foreach($categories as $cat)
+                <a href="{{ route('home', array_merge(request()->except('category', 'page'), ['category' => $cat->slug])) }}"
+                   class="feed-category-pill @if($catSlug === $cat->slug) active @endif">
+                    <i data-lucide="{{ $cat->icon }}"></i>
+                    {{ $cat->name }}
+                </a>
+            @endforeach
+        </div>
+
     </div>
 </div>
 

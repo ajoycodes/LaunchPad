@@ -53,7 +53,23 @@
         {{-- Product list --}}
         <main class="feed-main">
 
-            {{-- Product list --}}
+            {{-- Search bar --}}
+            <form method="GET" action="{{ route('home') }}" class="feed-search" role="search">
+                @foreach(request()->except('q', 'page') as $key => $val)
+                    <input type="hidden" name="{{ $key }}" value="{{ $val }}">
+                @endforeach
+                <div class="feed-search__wrap">
+                    <i data-lucide="search" class="feed-search__icon"></i>
+                    <input type="search" name="q" value="{{ $search }}"
+                           placeholder="Search products…" class="feed-search__input" autocomplete="off">
+                    @if($search)
+                        <a href="{{ route('home', request()->except('q', 'page')) }}" class="feed-search__clear" aria-label="Clear search">
+                            <i data-lucide="x"></i>
+                        </a>
+                    @endif
+                </div>
+            </form>
+
             @if($products->isEmpty())
                 <div class="feed-empty">
                     <i data-lucide="inbox" class="feed-empty__icon"></i>

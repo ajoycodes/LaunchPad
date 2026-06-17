@@ -522,6 +522,60 @@ a:hover {
   margin-top: var(--space-5);
 }
 
+/* Search bar */
+.feed-search {
+  margin-bottom: var(--space-4);
+}
+
+.feed-search__wrap {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.feed-search__icon {
+  position: absolute;
+  left: var(--space-3);
+  width: 16px;
+  height: 16px;
+  color: var(--color-text-muted);
+  pointer-events: none;
+}
+
+.feed-search__input {
+  width: 100%;
+  border: 1.5px solid var(--color-border);
+  border-radius: var(--radius-md);
+  padding: var(--space-2) var(--space-6) var(--space-2) calc(var(--space-3) + 16px + var(--space-2));
+  font-size: .9rem;
+  font-family: inherit;
+  color: var(--color-text-primary);
+  background: var(--color-bg);
+  transition: border-color .15s ease;
+}
+
+.feed-search__input:focus {
+  outline: none;
+  border-color: var(--color-accent);
+}
+
+.feed-search__clear {
+  position: absolute;
+  right: var(--space-3);
+  color: var(--color-text-muted);
+  display: flex;
+  align-items: center;
+}
+
+.feed-search__clear .lucide {
+  width: 15px;
+  height: 15px;
+}
+
+.feed-search__clear:hover {
+  color: var(--color-accent);
+}
+
 /* Product card */
 .product-card {
   position: relative;

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Category;
 use App\Models\Product;
 use App\Models\Tag;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -51,9 +52,19 @@ class HomeController extends Controller
             ->limit(10)
             ->get();
 
+        $topMakers = User::where('role', 'maker')
+            ->withCount(['products' => fn ($q) => $q
+                ->where('status', 'approved')
+                ->where('launch_date', '>=', now()->subDays(7))
+            ])
+            ->having('products_count', '>', 0)
+            ->orderByDesc('products_count')
+            ->limit(5)
+            ->get();
+
         return view('home.index', compact(
             'products', 'categories', 'tab', 'search', 'catSlug',
-            'featured', 'popularTags'
+            'featured', 'popularTags', 'topMakers'
         ));
     }
 }

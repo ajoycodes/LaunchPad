@@ -113,6 +113,31 @@
                 </div>
             @endif
 
+            {{-- Top makers this week --}}
+            @if($topMakers->count())
+                <div class="sidebar-card">
+                    <h3 class="sidebar-card__heading">Top Makers This Week</h3>
+                    <div class="sidebar-makers">
+                        @foreach($topMakers as $i => $maker)
+                            <div class="sidebar-maker">
+                                <span class="sidebar-maker__rank">{{ $i + 1 }}</span>
+                                <div class="sidebar-maker__avatar">
+                                    @if($maker->avatar)
+                                        <img src="{{ Storage::url($maker->avatar) }}" alt="{{ $maker->name }}">
+                                    @else
+                                        <span>{{ strtoupper(substr($maker->name, 0, 1)) }}</span>
+                                    @endif
+                                </div>
+                                <div class="sidebar-maker__info">
+                                    <span class="sidebar-maker__name">{{ $maker->name }}</span>
+                                    <span class="sidebar-maker__sub">{{ $maker->products_count }} launch{{ $maker->products_count !== 1 ? 'es' : '' }}</span>
+                                </div>
+                            </div>
+                        @endforeach
+                    </div>
+                </div>
+            @endif
+
             {{-- Popular tags --}}
             @if($popularTags->count())
                 <div class="sidebar-card">

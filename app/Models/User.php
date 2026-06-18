@@ -70,4 +70,14 @@ class User extends Authenticatable
     {
         return $this->role === 'maker';
     }
+
+    public function isHunter(): bool
+    {
+        return $this->role === 'hunter';
+    }
+
+    public function products()
+    {
+        return $this->hasMany(Product::class);
+    }
 }

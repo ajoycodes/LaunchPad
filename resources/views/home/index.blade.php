@@ -92,7 +92,43 @@
 
         {{-- Sidebar --}}
         <aside class="feed-sidebar">
-            <p class="text-muted" style="font-size:.85rem;">Sidebar coming soon.</p>
+
+            {{-- Featured product --}}
+            @if($featured)
+                <div class="sidebar-card">
+                    <h3 class="sidebar-card__heading">Featured</h3>
+                    <a href="{{ route('products.show', $featured) }}" class="featured-card">
+                        <div class="featured-card__logo">
+                            @if($featured->logo)
+                                <img src="{{ Storage::url($featured->logo) }}" alt="{{ $featured->name }}">
+                            @else
+                                <i data-lucide="box"></i>
+                            @endif
+                        </div>
+                        <div class="featured-card__body">
+                            <div class="featured-card__name">{{ $featured->name }}</div>
+                            <div class="featured-card__tagline">{{ $featured->tagline }}</div>
+                        </div>
+                    </a>
+                </div>
+            @endif
+
+            {{-- Popular tags --}}
+            @if($popularTags->count())
+                <div class="sidebar-card">
+                    <h3 class="sidebar-card__heading">Popular Tags</h3>
+                    <div class="sidebar-tags">
+                        @foreach($popularTags as $tag)
+                            <a href="{{ route('home', ['q' => $tag->name]) }}"
+                               class="sidebar-tag">
+                                {{ $tag->name }}
+                                <span class="sidebar-tag__count">{{ $tag->products_count }}</span>
+                            </a>
+                        @endforeach
+                    </div>
+                </div>
+            @endif
+
         </aside>
 
     </div>

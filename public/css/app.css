@@ -522,6 +522,108 @@ a:hover {
   margin-top: var(--space-5);
 }
 
+/* Feed sidebar cards */
+.feed-sidebar {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+  position: sticky;
+  top: calc(64px + 90px);
+}
+
+.featured-card {
+  display: flex;
+  gap: var(--space-3);
+  align-items: center;
+  margin-top: var(--space-2);
+}
+
+.featured-card__logo {
+  width: 44px;
+  height: 44px;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--color-border);
+  overflow: hidden;
+  flex-shrink: 0;
+  background: var(--color-surface);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.featured-card__logo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.featured-card__logo .lucide {
+  width: 20px;
+  height: 20px;
+  color: var(--color-text-muted);
+}
+
+.featured-card__body {
+  flex: 1;
+  min-width: 0;
+}
+
+.featured-card__name {
+  font-weight: 700;
+  font-size: .875rem;
+  color: var(--color-text-primary);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.featured-card__tagline {
+  font-size: .78rem;
+  color: var(--color-text-muted);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.featured-card:hover .featured-card__name {
+  color: var(--color-accent);
+}
+
+/* Sidebar tags */
+.sidebar-tags {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+  margin-top: var(--space-2);
+}
+
+.sidebar-tag {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: .85rem;
+  color: var(--color-text-body);
+  padding: var(--space-1) 0;
+  border-bottom: 1px solid var(--color-border);
+}
+
+.sidebar-tag:last-child {
+  border-bottom: none;
+}
+
+.sidebar-tag:hover {
+  color: var(--color-accent);
+}
+
+.sidebar-tag__count {
+  font-size: .75rem;
+  color: var(--color-text-muted);
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-full);
+  padding: 1px var(--space-2);
+}
+
 /* Search bar */
 .feed-search {
   margin-bottom: var(--space-4);

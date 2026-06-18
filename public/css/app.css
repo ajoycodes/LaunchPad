@@ -873,6 +873,83 @@ a:hover {
   cursor: default;
 }
 
+/* Upvoted state (Module 5 will wire this) */
+.btn-upvote-card.upvoted {
+  border-color: var(--color-accent);
+  color: var(--color-accent);
+  background: var(--color-accent-soft);
+}
+
+/* Product card — first card no top border */
+.feed-list .product-card:first-child {
+  border-top: 1px solid var(--color-border);
+}
+
+/* Product card rank number (optional future use) */
+.product-card__rank {
+  font-size: .75rem;
+  font-weight: 700;
+  color: var(--color-text-muted);
+  width: 20px;
+  text-align: right;
+  flex-shrink: 0;
+}
+
+/* Pagination (Bootstrap override to use design tokens) */
+.feed-pagination .pagination {
+  gap: var(--space-1);
+  flex-wrap: wrap;
+}
+
+.feed-pagination .page-link {
+  border-radius: var(--radius-md) !important;
+  border-color: var(--color-border);
+  color: var(--color-text-body);
+  font-size: .85rem;
+  padding: var(--space-1) var(--space-3);
+}
+
+.feed-pagination .page-link:hover,
+.feed-pagination .page-link:focus {
+  border-color: var(--color-accent);
+  color: var(--color-accent);
+  background: var(--color-accent-soft);
+  box-shadow: none;
+}
+
+.feed-pagination .page-item.active .page-link {
+  background-color: var(--color-accent);
+  border-color: var(--color-accent);
+  color: #fff;
+}
+
+.feed-pagination .page-item.disabled .page-link {
+  opacity: .4;
+}
+
+/* Mobile — stack sub-header vertically */
+@media (max-width: 600px) {
+  .feed-tabs-row {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .feed-categories {
+    overflow-x: auto;
+    flex-wrap: nowrap;
+    padding-bottom: var(--space-1);
+    scrollbar-width: none;
+  }
+
+  .feed-categories::-webkit-scrollbar {
+    display: none;
+  }
+
+  .product-card__tags {
+    display: none;
+  }
+}
+
 /* ==========================================================================
    Submit / Edit product form
    ========================================================================== */

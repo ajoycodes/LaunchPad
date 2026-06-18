@@ -17,7 +17,8 @@ class HomeController extends Controller
         $search  = $request->query('q');
 
         $query = Product::where('status', 'approved')
-            ->with(['user', 'category', 'tags']);
+            ->with(['user', 'category', 'tags'])
+            ->withCount('upvotes');
 
         match ($tab) {
             'week'    => $query->where('launch_date', '>=', now()->subDays(7)),
@@ -36,7 +37,7 @@ class HomeController extends Controller
             );
         }
 
-        $products = $query->orderBy('created_at', 'desc')->paginate(20)->withQueryString();
+        $products = $query->orderByDesc('upvotes_count')->orderByDesc('created_at')->paginate(20)->withQueryString();
 
         $categories = Category::orderBy('name')->get();
 

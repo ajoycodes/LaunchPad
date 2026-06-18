@@ -68,6 +68,7 @@ class ProductController extends Controller
     public function show(Product $product)
     {
         $product->loadMissing(['user', 'category', 'tags', 'screenshots']);
+        $product->loadCount('upvotes');
         $product->increment('views_count');
 
         return view('products.show', compact('product'));

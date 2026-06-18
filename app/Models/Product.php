@@ -63,4 +63,9 @@ class Product extends Model
     {
         return $this->hasMany(ProductScreenshot::class)->orderBy('order');
     }
+
+    public function upvotes()
+    {
+        return $this->hasMany(Upvote::class);
+    }
 }

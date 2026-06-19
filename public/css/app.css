@@ -873,6 +873,17 @@ a:hover {
   cursor: default;
 }
 
+/* Count bump animation on upvote */
+@keyframes upvote-bump {
+  0%   { transform: scale(1); }
+  40%  { transform: scale(1.35); }
+  100% { transform: scale(1); }
+}
+
+.upvote-count--bump {
+  animation: upvote-bump .25s ease;
+}
+
 /* Upvoted / hover state */
 .btn-upvote-card.upvoted,
 .btn-upvote-card:not(:disabled):hover {

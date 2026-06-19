@@ -36,6 +36,9 @@
     {{-- Lucide icons --}}
     <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
 
+    {{-- Upvote AJAX handler --}}
+    <script src="{{ asset('js/upvote.js') }}"></script>
+
     @stack('scripts')
 
     <script>lucide.createIcons();</script>

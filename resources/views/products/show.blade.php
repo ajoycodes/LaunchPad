@@ -29,10 +29,20 @@
                 <h1 class="product-header__name">{{ $product->name }}</h1>
                 <p class="product-header__tagline">{{ $product->tagline }}</p>
 
+                @php
+                    $isUpvoted = auth()->check() && $product->isUpvotedBy(auth()->user());
+                    $count     = $product->upvotes_count ?? 0;
+                @endphp
+
                 <div class="product-header__actions">
-                    {{-- Upvote placeholder (Module 5) --}}
-                    <button class="btn-upvote" disabled>
-                        ▲ <span>Upvote</span>
+                    <button class="upvote-btn btn-upvote {{ $isUpvoted ? 'upvoted' : '' }}"
+                            data-product-id="{{ $product->id }}"
+                            data-auth="{{ auth()->check() ? 'true' : 'false' }}"
+                            aria-label="Upvote {{ $product->name }}"
+                            aria-pressed="{{ $isUpvoted ? 'true' : 'false' }}">
+                        <i data-lucide="chevron-up" class="icon-inline"></i>
+                        <span class="upvote-count">{{ $count }}</span>
+                        <span>{{ $count === 1 ? 'upvote' : 'upvotes' }}</span>
                     </button>
 
                     @if($product->website_url)

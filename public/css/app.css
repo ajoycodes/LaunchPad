@@ -873,8 +873,9 @@ a:hover {
   cursor: default;
 }
 
-/* Upvoted state (Module 5 will wire this) */
-.btn-upvote-card.upvoted {
+/* Upvoted / hover state */
+.btn-upvote-card.upvoted,
+.btn-upvote-card:not(:disabled):hover {
   border-color: var(--color-accent);
   color: var(--color-accent);
   background: var(--color-accent-soft);
@@ -1402,9 +1403,11 @@ a:hover {
   transition: border-color .15s ease, background-color .15s ease;
 }
 
-.btn-upvote:not(:disabled):hover {
+.btn-upvote:hover,
+.btn-upvote.upvoted {
+  background: var(--color-accent);
   border-color: var(--color-accent);
-  color: var(--color-accent);
+  color: #fff;
 }
 
 .btn-upvote:disabled {

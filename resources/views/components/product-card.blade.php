@@ -1,5 +1,10 @@
 @props(['product'])
 
+@php
+    $isUpvoted = auth()->check() && $product->isUpvotedBy(auth()->user());
+    $count     = $product->upvotes_count ?? 0;
+@endphp
+
 <div class="product-card">
     {{-- Invisible full-row link (sits behind content via z-index) --}}
     <a href="{{ route('products.show', $product) }}" class="product-card__row-link" aria-label="{{ $product->name }}"></a>
@@ -28,9 +33,13 @@
 
     {{-- Upvote (sits above row link via z-index) --}}
     <div class="product-card__upvote">
-        <button class="btn-upvote-card" disabled title="Upvoting coming soon">
+        <button class="upvote-btn btn-upvote-card {{ $isUpvoted ? 'upvoted' : '' }}"
+                data-product-id="{{ $product->id }}"
+                data-auth="{{ auth()->check() ? 'true' : 'false' }}"
+                aria-label="Upvote {{ $product->name }}"
+                aria-pressed="{{ $isUpvoted ? 'true' : 'false' }}">
             <i data-lucide="chevron-up"></i>
-            <span>0</span>
+            <span class="upvote-count">{{ $count }}</span>
         </button>
     </div>
 </div>

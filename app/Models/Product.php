@@ -68,4 +68,9 @@ class Product extends Model
     {
         return $this->hasMany(Upvote::class);
     }
+
+    public function isUpvotedBy(User $user): bool
+    {
+        return $this->upvotes()->where('user_id', $user->id)->exists();
+    }
 }

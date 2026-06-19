@@ -873,6 +873,12 @@ a:hover {
   cursor: default;
 }
 
+/* Loading state while request is in flight */
+.upvote-btn.loading {
+  opacity: .5;
+  cursor: wait;
+}
+
 /* Count bump animation on upvote */
 @keyframes upvote-bump {
   0%   { transform: scale(1); }

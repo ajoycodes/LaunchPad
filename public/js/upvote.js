@@ -1,7 +1,8 @@
 (function () {
     'use strict';
 
-    const CSRF = document.querySelector('meta[name="csrf-token"]')?.content ?? '';
+    const CSRF      = document.querySelector('meta[name="csrf-token"]')?.content ?? '';
+    const inflight  = new Set(); // track product IDs with pending requests
 
     document.addEventListener('click', function (e) {
         const btn = e.target.closest('.upvote-btn');
@@ -14,10 +15,13 @@
         }
 
         const productId = btn.dataset.productId;
-        if (!productId || btn.disabled) return;
+        if (!productId || inflight.has(productId)) return;
 
-        btn.disabled = true;
-        btn.classList.add('loading');
+        inflight.add(productId);
+
+        // Disable every button for this product while request is in flight
+        const allBtns = document.querySelectorAll(`.upvote-btn[data-product-id="${productId}"]`);
+        allBtns.forEach(b => { b.disabled = true; b.classList.add('loading'); });
 
         fetch(`/upvote/${productId}`, {
             method: 'POST',
@@ -32,8 +36,7 @@
             return res.json();
         })
         .then(data => {
-            // Update all upvote buttons for this product on the page
-            document.querySelectorAll(`.upvote-btn[data-product-id="${productId}"]`).forEach(b => {
+            allBtns.forEach(b => {
                 b.classList.toggle('upvoted', data.upvoted);
                 b.setAttribute('aria-pressed', data.upvoted ? 'true' : 'false');
 
@@ -46,19 +49,19 @@
                     }, { once: true });
                 }
 
-                // Update the label on the show page (has the "upvotes" text node)
+                // Update plural label on show page
                 const labelEl = b.querySelectorAll('span')[1];
-                if (labelEl) {
+                if (labelEl && !labelEl.classList.contains('upvote-count')) {
                     labelEl.textContent = data.count === 1 ? 'upvote' : 'upvotes';
                 }
             });
         })
         .catch(() => {
-            // Silently restore on network error
+            // Silently ignore — button state restored in finally
         })
         .finally(() => {
-            btn.disabled = false;
-            btn.classList.remove('loading');
+            inflight.delete(productId);
+            allBtns.forEach(b => { b.disabled = false; b.classList.remove('loading'); });
         });
     });
 }());

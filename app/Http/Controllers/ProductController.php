@@ -71,7 +71,23 @@ class ProductController extends Controller
         $product->loadCount('upvotes');
         $product->increment('views_count');
 
-        return view('products.show', compact('product'));
+        $comments = $product->comments()
+            ->with(['user', 'replies.user'])
+            ->whereNull('parent_id')
+            ->where('is_roast', false)
+            ->orderBy('created_at')
+            ->get();
+
+        $roastComments = $product->is_roast_enabled
+            ? $product->comments()
+                ->with(['user', 'replies.user'])
+                ->whereNull('parent_id')
+                ->where('is_roast', true)
+                ->orderBy('created_at')
+                ->get()
+            : collect();
+
+        return view('products.show', compact('product', 'comments', 'roastComments'));
     }
 
     public function edit(Product $product)

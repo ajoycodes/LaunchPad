@@ -105,10 +105,47 @@
                     </div>
                 @endif
 
-                {{-- Comments placeholder --}}
-                <div class="product-section">
-                    <h2>Discussion</h2>
-                    <p class="text-muted">Comments coming soon.</p>
+                {{-- Comments --}}
+                <div class="product-section" id="comments">
+                    <h2>Discussion <span class="comment-count">({{ $comments->count() }})</span></h2>
+
+                    @auth
+                        <form method="POST" action="{{ route('comments.store', $product) }}" class="comment-form">
+                            @csrf
+                            <input type="hidden" name="is_roast" value="0">
+                            <div class="comment-form__inner">
+                                <div class="comment-form__avatar">
+                                    @if(auth()->user()->avatar)
+                                        <img src="{{ Storage::url(auth()->user()->avatar) }}" alt="">
+                                    @else
+                                        <span>{{ strtoupper(substr(auth()->user()->name, 0, 1)) }}</span>
+                                    @endif
+                                </div>
+                                <div class="comment-form__fields">
+                                    <textarea name="body" rows="3" maxlength="1000"
+                                              placeholder="Share your thoughts…" required>{{ old('body') }}</textarea>
+                                    @error('body')<span class="form-error">{{ $message }}</span>@enderror
+                                    <div class="comment-form__actions">
+                                        <button type="submit" class="btn-accent btn-sm">Post comment</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    @else
+                        <p class="text-muted" style="font-size:.9rem;">
+                            <a href="{{ route('login') }}">Log in</a> to join the discussion.
+                        </p>
+                    @endauth
+
+                    @if($comments->isEmpty())
+                        <p class="text-muted" style="font-size:.9rem; margin-top:var(--space-4);">No comments yet. Be the first!</p>
+                    @else
+                        <div class="comment-list">
+                            @foreach($comments as $comment)
+                                @include('partials.comment', ['comment' => $comment, 'product' => $product])
+                            @endforeach
+                        </div>
+                    @endif
                 </div>
 
                 {{-- Build log placeholder --}}

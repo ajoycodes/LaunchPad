@@ -1841,6 +1841,25 @@ a:hover {
   border-color: #C2410C;
 }
 
+/* Maker badge on comments */
+.comment-badge {
+  display: inline-block;
+  font-size: .7rem;
+  font-weight: 700;
+  letter-spacing: .04em;
+  text-transform: uppercase;
+  border-radius: 4px;
+  padding: 1px 6px;
+  vertical-align: middle;
+  margin-left: 4px;
+}
+
+.comment-badge--maker {
+  background: #EEF2FF;
+  color: #4338CA;
+  border: 1px solid #C7D2FE;
+}
+
 /* Nested replies — indented */
 .comment-replies {
   margin-left: calc(36px + var(--space-3));

@@ -10,6 +10,9 @@
     <div class="comment__body">
         <div class="comment__meta">
             <span class="comment__author">{{ $comment->user->name }}</span>
+            @if(isset($product) && $comment->user_id === $product->user_id)
+                <span class="comment-badge comment-badge--maker">Maker</span>
+            @endif
             <span class="comment__time text-muted">· {{ $comment->created_at->diffForHumans() }}</span>
         </div>
 

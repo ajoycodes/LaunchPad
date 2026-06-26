@@ -217,5 +217,36 @@
         });
     });
 }());
+
+// Inline reply form toggle
+(function () {
+    document.addEventListener('click', function (e) {
+        // Open reply form
+        const replyBtn = e.target.closest('.comment__reply-btn');
+        if (replyBtn) {
+            const id   = replyBtn.dataset.commentId;
+            const form = document.getElementById('reply-form-' + id);
+            if (!form) return;
+
+            // Close any other open reply forms
+            document.querySelectorAll('.comment__reply-form').forEach(f => {
+                if (f !== form) f.style.display = 'none';
+            });
+
+            const isOpen = form.style.display !== 'none';
+            form.style.display = isOpen ? 'none' : 'block';
+            if (!isOpen) form.querySelector('textarea')?.focus();
+            return;
+        }
+
+        // Cancel reply
+        const cancelBtn = e.target.closest('.comment__cancel-reply');
+        if (cancelBtn) {
+            const id   = cancelBtn.dataset.commentId;
+            const form = document.getElementById('reply-form-' + id);
+            if (form) form.style.display = 'none';
+        }
+    });
+}());
 </script>
 @endpush

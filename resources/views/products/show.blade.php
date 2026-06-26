@@ -148,11 +148,53 @@
                     @endif
                 </div>
 
-                {{-- Build log placeholder --}}
+                {{-- Roast thread --}}
                 @if($product->is_roast_enabled)
-                    <div class="product-section">
-                        <h2>Roast Mode 🔥</h2>
-                        <p class="text-muted">Roast feedback coming soon.</p>
+                    <div class="product-section roast-section" id="roast">
+                        <div class="roast-header">
+                            <i data-lucide="flame" class="roast-header__icon"></i>
+                            <div>
+                                <h2 class="roast-header__title">Roast Mode</h2>
+                                <p class="roast-header__sub">Brutally honest feedback only. No sugarcoating.</p>
+                            </div>
+                        </div>
+
+                        @auth
+                            <form method="POST" action="{{ route('comments.store', $product) }}" class="comment-form">
+                                @csrf
+                                <input type="hidden" name="is_roast" value="1">
+                                <div class="comment-form__inner">
+                                    <div class="comment-form__avatar">
+                                        @if(auth()->user()->avatar)
+                                            <img src="{{ Storage::url(auth()->user()->avatar) }}" alt="">
+                                        @else
+                                            <span>{{ strtoupper(substr(auth()->user()->name, 0, 1)) }}</span>
+                                        @endif
+                                    </div>
+                                    <div class="comment-form__fields">
+                                        <textarea name="body" rows="3" maxlength="1000"
+                                                  placeholder="Give them your honest roast…" required></textarea>
+                                        <div class="comment-form__actions">
+                                            <button type="submit" class="btn-roast btn-sm">Roast it</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                        @else
+                            <p class="text-muted" style="font-size:.9rem;">
+                                <a href="{{ route('login') }}">Log in</a> to roast this product.
+                            </p>
+                        @endauth
+
+                        @if($roastComments->isEmpty())
+                            <p class="text-muted" style="font-size:.9rem; margin-top:var(--space-4);">No roasts yet. Be the first to roast!</p>
+                        @else
+                            <div class="comment-list">
+                                @foreach($roastComments as $comment)
+                                    @include('partials.comment', ['comment' => $comment, 'product' => $product])
+                                @endforeach
+                            </div>
+                        @endif
                     </div>
                 @endif
 

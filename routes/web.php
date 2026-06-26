@@ -4,6 +4,7 @@ use App\Http\Controllers\Auth\AuthenticatedSessionController;
 use App\Http\Controllers\Auth\RegisteredUserController;
 use App\Http\Controllers\CommentController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\MakerController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\UpvoteController;
 use Illuminate\Support\Facades\Route;
@@ -26,6 +27,7 @@ Route::middleware('auth')->group(function () {
 });
 
 Route::get('/products/{product:slug}', [ProductController::class, 'show'])->name('products.show');
+Route::get('/makers/{username}', [MakerController::class, 'show'])->name('makers.show');
 
 Route::middleware(['auth', 'maker'])->group(function () {
     Route::get('/submit', [ProductController::class, 'create'])->name('products.create');

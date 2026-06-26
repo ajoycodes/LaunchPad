@@ -28,5 +28,43 @@
                 </form>
             @endif
         </div>
+
+        {{-- Inline reply form (hidden by default, toggled by JS) --}}
+        @auth
+            <div class="comment__reply-form" id="reply-form-{{ $comment->id }}" style="display:none;">
+                <form method="POST" action="{{ route('comments.store', $product) }}" class="comment-form" style="margin-top:var(--space-3); margin-bottom:0;">
+                    @csrf
+                    <input type="hidden" name="parent_id" value="{{ $comment->id }}">
+                    <input type="hidden" name="is_roast" value="{{ $comment->is_roast ? '1' : '0' }}">
+                    <div class="comment-form__inner">
+                        <div class="comment-form__avatar">
+                            @if(auth()->user()->avatar)
+                                <img src="{{ Storage::url(auth()->user()->avatar) }}" alt="">
+                            @else
+                                <span>{{ strtoupper(substr(auth()->user()->name, 0, 1)) }}</span>
+                            @endif
+                        </div>
+                        <div class="comment-form__fields">
+                            <textarea name="body" rows="2" maxlength="1000"
+                                      placeholder="Write a reply…" required></textarea>
+                            <div class="comment-form__actions">
+                                <button type="button" class="comment__cancel-reply btn-ghost btn-sm"
+                                        data-comment-id="{{ $comment->id }}">Cancel</button>
+                                <button type="submit" class="btn-accent btn-sm">Reply</button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        @endauth
+
+        {{-- Nested replies --}}
+        @if($comment->replies->count())
+            <div class="comment-replies">
+                @foreach($comment->replies as $reply)
+                    @include('partials.comment', ['comment' => $reply, 'product' => $product])
+                @endforeach
+            </div>
+        @endif
     </div>
 </div>

@@ -1787,3 +1787,23 @@ a:hover {
 .comment__delete-btn:hover {
   color: #EF4444;
 }
+
+/* Nested replies — indented */
+.comment-replies {
+  margin-left: calc(36px + var(--space-3));
+  border-left: 2px solid var(--color-border);
+  padding-left: var(--space-4);
+  margin-top: var(--space-2);
+}
+
+.comment-replies .comment {
+  border-top: none;
+  padding-top: var(--space-3);
+  padding-bottom: var(--space-2);
+}
+
+.comment-replies .comment__avatar {
+  width: 28px;
+  height: 28px;
+  font-size: .75rem;
+}

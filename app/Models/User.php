@@ -80,4 +80,9 @@ class User extends Authenticatable
     {
         return $this->hasMany(Product::class);
     }
+
+    public function badges()
+    {
+        return $this->hasMany(Badge::class)->orderBy('earned_at');
+    }
 }

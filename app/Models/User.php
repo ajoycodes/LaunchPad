@@ -85,4 +85,9 @@ class User extends Authenticatable
     {
         return $this->hasMany(Badge::class)->orderBy('earned_at');
     }
+
+    public function collections()
+    {
+        return $this->hasMany(Collection::class)->orderByDesc('created_at');
+    }
 }

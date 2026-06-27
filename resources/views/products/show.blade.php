@@ -58,6 +58,37 @@
                     @can('update', $product)
                         <a href="{{ route('products.edit', $product) }}" class="btn-ghost btn-sm">Edit</a>
                     @endcan
+
+                    {{-- Save to Collection dropdown --}}
+                    @auth
+                        @php $userCollections = auth()->user()->collections; @endphp
+                        <div class="save-dropdown" id="saveDropdown">
+                            <button class="btn-ghost btn-sm save-dropdown__toggle" id="saveToggle"
+                                    aria-expanded="false" aria-haspopup="true">
+                                <i data-lucide="bookmark" class="icon-inline"></i> Save
+                            </button>
+                            <div class="save-dropdown__menu" id="saveMenu" role="menu" style="display:none;">
+                                @if($userCollections->isEmpty())
+                                    <a href="{{ route('collections.create') }}" class="save-dropdown__item">
+                                        <i data-lucide="plus" class="icon-inline"></i> Create a collection
+                                    </a>
+                                @else
+                                    @foreach($userCollections as $col)
+                                        <button class="save-dropdown__item save-to-collection"
+                                                data-collection-id="{{ $col->id }}"
+                                                data-product-id="{{ $product->id }}">
+                                            <i data-lucide="bookmark" class="icon-inline"></i>
+                                            {{ $col->name }}
+                                        </button>
+                                    @endforeach
+                                    <div class="save-dropdown__divider"></div>
+                                    <a href="{{ route('collections.create') }}" class="save-dropdown__item">
+                                        <i data-lucide="plus" class="icon-inline"></i> New collection
+                                    </a>
+                                @endif
+                            </div>
+                        </div>
+                    @endauth
                 </div>
             </div>
         </div>
@@ -287,6 +318,27 @@
             const id   = cancelBtn.dataset.commentId;
             const form = document.getElementById('reply-form-' + id);
             if (form) form.style.display = 'none';
+        }
+    });
+}());
+
+// Save to Collection dropdown
+(function () {
+    const toggle = document.getElementById('saveToggle');
+    const menu   = document.getElementById('saveMenu');
+    if (!toggle || !menu) return;
+
+    toggle.addEventListener('click', function (e) {
+        e.stopPropagation();
+        const isOpen = menu.style.display !== 'none';
+        menu.style.display = isOpen ? 'none' : 'block';
+        toggle.setAttribute('aria-expanded', !isOpen);
+    });
+
+    document.addEventListener('click', function (e) {
+        if (!e.target.closest('#saveDropdown')) {
+            menu.style.display = 'none';
+            toggle.setAttribute('aria-expanded', 'false');
         }
     });
 }());

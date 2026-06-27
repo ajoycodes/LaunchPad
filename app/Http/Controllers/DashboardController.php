@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\ProductUpdate;
 use App\Models\Upvote;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -53,22 +52,5 @@ class DashboardController extends Controller
             'upvoteDates', 'upvoteCounts',
             'viewsData'
         ));
-    }
-
-    public function storeUpdate(Request $request)
-    {
-        $data = $request->validate([
-            'product_id' => ['required', 'exists:products,id'],
-            'body'       => ['required', 'string', 'max:1000'],
-        ]);
-
-        $product = $request->user()->products()->findOrFail($data['product_id']);
-
-        $product->updates()->create([
-            'user_id' => $request->user()->id,
-            'body'    => $data['body'],
-        ]);
-
-        return back()->with('success', 'Update posted!');
     }
 }

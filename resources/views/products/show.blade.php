@@ -205,7 +205,7 @@
                 {{-- Maker card --}}
                 <div class="sidebar-card">
                     <h3 class="sidebar-card__heading">Made by</h3>
-                    <div class="maker-card">
+                    <a href="{{ route('makers.show', $product->user->username) }}" class="maker-card maker-card--link">
                         <div class="maker-card__avatar">
                             @if($product->user->avatar)
                                 <img src="{{ Storage::url($product->user->avatar) }}" alt="{{ $product->user->name }}">
@@ -217,7 +217,7 @@
                             <strong>{{ $product->user->name }}</strong>
                             <span class="text-muted">@{{ $product->user->username }}</span>
                         </div>
-                    </div>
+                    </a>
                     @if($product->user->bio)
                         <p class="maker-card__bio">{{ $product->user->bio }}</p>
                     @endif

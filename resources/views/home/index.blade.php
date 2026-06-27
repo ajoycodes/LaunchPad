@@ -119,7 +119,7 @@
                     <h3 class="sidebar-card__heading">Top Makers This Week</h3>
                     <div class="sidebar-makers">
                         @foreach($topMakers as $i => $maker)
-                            <div class="sidebar-maker">
+                            <a href="{{ route('makers.show', $maker->username) }}" class="sidebar-maker sidebar-maker--link">
                                 <span class="sidebar-maker__rank">{{ $i + 1 }}</span>
                                 <div class="sidebar-maker__avatar">
                                     @if($maker->avatar)
@@ -132,7 +132,7 @@
                                     <span class="sidebar-maker__name">{{ $maker->name }}</span>
                                     <span class="sidebar-maker__sub">{{ $maker->products_count }} launch{{ $maker->products_count !== 1 ? 'es' : '' }}</span>
                                 </div>
-                            </div>
+                            </a>
                         @endforeach
                     </div>
                 </div>

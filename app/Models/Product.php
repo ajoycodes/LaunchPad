@@ -74,6 +74,11 @@ class Product extends Model
         return $this->hasMany(Comment::class);
     }
 
+    public function updates()
+    {
+        return $this->hasMany(ProductUpdate::class)->orderByDesc('created_at');
+    }
+
     public function isUpvotedBy(User $user): bool
     {
         return $this->upvotes()->where('user_id', $user->id)->exists();

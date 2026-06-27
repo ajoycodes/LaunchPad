@@ -9,7 +9,7 @@
 
     <div class="comment__body">
         <div class="comment__meta">
-            <span class="comment__author">{{ $comment->user->name }}</span>
+            <a href="{{ route('makers.show', $comment->user->username) }}" class="comment__author">{{ $comment->user->name }}</a>
             @if(isset($product) && $comment->user_id === $product->user_id)
                 <span class="comment-badge comment-badge--maker">Maker</span>
             @endif

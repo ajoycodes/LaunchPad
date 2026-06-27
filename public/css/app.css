@@ -1767,6 +1767,11 @@ a:hover {
   font-weight: 600;
   font-size: .875rem;
   color: var(--color-text-primary);
+  transition: color .15s ease;
+}
+
+a.comment__author:hover {
+  color: var(--color-accent);
 }
 
 .comment__time {

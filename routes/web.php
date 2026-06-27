@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
 use App\Http\Controllers\Auth\RegisteredUserController;
+use App\Http\Controllers\CollectionController;
 use App\Http\Controllers\CommentController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\MakerController;
@@ -31,6 +32,17 @@ Route::middleware('auth')->group(function () {
 
 Route::get('/products/{product:slug}', [ProductController::class, 'show'])->name('products.show');
 Route::get('/makers/{username}', [MakerController::class, 'show'])->name('makers.show');
+
+Route::get('/collections', [CollectionController::class, 'index'])->name('collections.index');
+Route::get('/collections/{slug}', [CollectionController::class, 'show'])->name('collections.show');
+
+Route::middleware('auth')->group(function () {
+    Route::get('/collections/new', [CollectionController::class, 'create'])->name('collections.create');
+    Route::post('/collections', [CollectionController::class, 'store'])->name('collections.store');
+    Route::post('/collections/{collection}/add-product', [CollectionController::class, 'addProduct'])->name('collections.add-product');
+    Route::post('/collections/{collection}/follow', [CollectionController::class, 'follow'])->name('collections.follow');
+    Route::delete('/collections/{collection}', [CollectionController::class, 'destroy'])->name('collections.destroy');
+});
 
 Route::middleware(['auth', 'maker'])->group(function () {
     Route::get('/submit', [ProductController::class, 'create'])->name('products.create');

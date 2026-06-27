@@ -2384,3 +2384,37 @@ a.comment__author:hover {
   margin: 0 auto var(--space-4);
   display: block;
 }
+
+/* Radio option group */
+.radio-group {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+.radio-option {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-3);
+  padding: var(--space-3) var(--space-4);
+  border: 1.5px solid var(--color-border);
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  transition: border-color .15s ease;
+}
+
+.radio-option:has(input:checked) {
+  border-color: var(--color-accent);
+  background: var(--color-accent-soft);
+}
+
+.radio-option input[type="radio"] {
+  margin-top: 2px;
+  flex-shrink: 0;
+  accent-color: var(--color-accent);
+}
+
+.radio-option span {
+  font-size: .875rem;
+  line-height: 1.5;
+}

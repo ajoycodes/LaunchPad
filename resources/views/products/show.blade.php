@@ -340,6 +340,32 @@
             menu.style.display = 'none';
             toggle.setAttribute('aria-expanded', 'false');
         }
+
+        const saveBtn = e.target.closest('.save-to-collection');
+        if (!saveBtn) return;
+
+        e.preventDefault();
+        saveBtn.disabled = true;
+
+        const collectionId = saveBtn.dataset.collectionId;
+        const productId    = saveBtn.dataset.productId;
+
+        fetch(`/collections/${collectionId}/add-product`, {
+            method: 'POST',
+            headers: {
+                'X-CSRF-TOKEN': CSRF,
+                'Accept':       'application/json',
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ product_id: productId }),
+        })
+        .then(res => res.json())
+        .then(() => {
+            saveBtn.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg> Saved!';
+            saveBtn.style.color = '#16A34A';
+            setTimeout(() => { menu.style.display = 'none'; }, 800);
+        })
+        .finally(() => { saveBtn.disabled = false; });
     });
 }());
 </script>

@@ -4,9 +4,11 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreProductRequest;
 use App\Http\Requests\UpdateProductRequest;
+use App\Models\Badge;
 use App\Models\Category;
 use App\Models\Product;
 use App\Models\Tag;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
@@ -154,5 +156,37 @@ class ProductController extends Controller
 
         return redirect()->route('home')
             ->with('success', 'Product deleted.');
+    }
+
+    public static function awardBadges(User $user): void
+    {
+        $approvedCount = $user->products()->where('status', 'approved')->count();
+
+        if ($approvedCount >= 1) {
+            Badge::firstOrCreate(
+                ['user_id' => $user->id, 'type' => 'first_launch'],
+                ['label' => 'First Launch', 'icon' => 'rocket', 'earned_at' => now()]
+            );
+        }
+
+        if ($approvedCount >= 3) {
+            Badge::firstOrCreate(
+                ['user_id' => $user->id, 'type' => 'streak_3'],
+                ['label' => '3 Launches', 'icon' => 'flame', 'earned_at' => now()]
+            );
+        }
+
+        $upvoteThreshold = $user->products()
+            ->where('status', 'approved')
+            ->withCount('upvotes')
+            ->having('upvotes_count', '>=', 50)
+            ->exists();
+
+        if ($upvoteThreshold) {
+            Badge::firstOrCreate(
+                ['user_id' => $user->id, 'type' => 'community_fav'],
+                ['label' => 'Community Fav', 'icon' => 'heart', 'earned_at' => now()]
+            );
+        }
     }
 }

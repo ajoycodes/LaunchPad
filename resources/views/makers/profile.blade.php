@@ -95,6 +95,32 @@
                 @endif
             </div>
 
+            {{-- Public collections --}}
+            @if($maker->collections()->where('is_public', true)->exists())
+                <div class="maker-collections">
+                    <h2 class="maker-section-title">Collections</h2>
+                    <div class="collection-grid">
+                        @foreach($maker->collections()->where('is_public', true)->withCount(['products','followers'])->get() as $collection)
+                            <a href="{{ route('collections.show', $collection->slug) }}" class="collection-card">
+                                <div class="collection-card__header">
+                                    <h3 class="collection-card__name">{{ $collection->name }}</h3>
+                                    <span class="collection-card__count">{{ $collection->products_count }} products</span>
+                                </div>
+                                @if($collection->description)
+                                    <p class="collection-card__desc">{{ Str::limit($collection->description, 80) }}</p>
+                                @endif
+                                <div class="collection-card__footer">
+                                    <span class="collection-card__followers">
+                                        <i data-lucide="users" class="icon-inline"></i>
+                                        {{ $collection->followers_count }}
+                                    </span>
+                                </div>
+                            </a>
+                        @endforeach
+                    </div>
+                </div>
+            @endif
+
         </div>
     </div>
 </div>

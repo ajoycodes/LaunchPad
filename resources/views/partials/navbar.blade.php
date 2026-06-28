@@ -16,7 +16,10 @@
     {{-- Auth buttons (right) --}}
     <div class="site-nav__auth">
       @auth
-        <a href="{{ url('/dashboard') }}" class="btn-ghost">Dashboard</a>
+        <a href="{{ route('profile.edit') }}" class="btn-ghost">
+            <i data-lucide="settings" class="icon-inline"></i> Settings
+        </a>
+        <a href="{{ route('dashboard') }}" class="btn-ghost">Dashboard</a>
         <form method="POST" action="{{ url('/logout') }}" class="d-inline">
           @csrf
           <button type="submit" class="btn-ghost">Log out</button>

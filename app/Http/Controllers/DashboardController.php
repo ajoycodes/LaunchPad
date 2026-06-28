@@ -14,7 +14,7 @@ class DashboardController extends Controller
 
         $products = $user->products()
             ->with(['category'])
-            ->withCount(['upvotes', 'comments'])
+            ->withCount(['upvotes', 'comments', 'updates'])
             ->orderByDesc('created_at')
             ->get();
 

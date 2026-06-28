@@ -2751,3 +2751,151 @@ a.comment__author:hover {
   color: var(--color-text-body);
   line-height: 1.6;
 }
+
+/* ==========================================================================
+   Launch Calendar
+   ========================================================================== */
+
+.calendar-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.calendar-item {
+  display: flex;
+  align-items: center;
+  gap: var(--space-4);
+  padding: var(--space-4) 0;
+  border-bottom: 1px solid var(--color-border);
+}
+
+.calendar-item__logo {
+  width: 52px;
+  height: 52px;
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.calendar-item__logo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.calendar-item__logo-placeholder {
+  width: 24px;
+  height: 24px;
+  color: var(--color-text-muted);
+}
+
+.calendar-item__info {
+  flex: 1;
+  min-width: 0;
+}
+
+.calendar-item__name {
+  font-weight: 700;
+  font-size: .95rem;
+  color: var(--color-text-primary);
+  transition: color .15s ease;
+}
+
+.calendar-item__name:hover {
+  color: var(--color-accent);
+}
+
+.calendar-item__tagline {
+  font-size: .85rem;
+  color: var(--color-text-secondary);
+  margin: 2px 0 var(--space-2);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.calendar-item__meta {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  font-size: .8rem;
+  color: var(--color-text-secondary);
+}
+
+.calendar-item__category {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.calendar-item__maker {
+  color: var(--color-text-secondary);
+  transition: color .15s ease;
+}
+
+.calendar-item__maker:hover {
+  color: var(--color-accent);
+}
+
+.calendar-item__right {
+  text-align: right;
+  flex-shrink: 0;
+}
+
+.calendar-item__date {
+  font-size: .8rem;
+  color: var(--color-text-secondary);
+  margin-bottom: var(--space-2);
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  justify-content: flex-end;
+}
+
+/* Countdown timer */
+.countdown {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  font-variant-numeric: tabular-nums;
+}
+
+.countdown__unit {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-width: 32px;
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  padding: 4px 6px;
+}
+
+.countdown__num {
+  font-size: .95rem;
+  font-weight: 700;
+  color: var(--color-accent);
+  line-height: 1;
+}
+
+.countdown__unit small {
+  font-size: .6rem;
+  color: var(--color-text-muted);
+  text-transform: uppercase;
+  letter-spacing: .05em;
+}
+
+.countdown__sep {
+  font-size: .9rem;
+  font-weight: 700;
+  color: var(--color-text-muted);
+  padding: 0 1px;
+  align-self: center;
+  margin-bottom: 10px;
+}

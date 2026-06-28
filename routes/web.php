@@ -6,6 +6,7 @@ use App\Http\Controllers\CollectionController;
 use App\Http\Controllers\CommentController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\LaunchCalendarController;
 use App\Http\Controllers\MakerController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProductUpdateController;
@@ -37,6 +38,7 @@ Route::middleware('auth')->group(function () {
 Route::get('/products/{product:slug}', [ProductController::class, 'show'])->name('products.show');
 Route::get('/makers/{username}', [MakerController::class, 'show'])->name('makers.show');
 
+Route::get('/launch-calendar', [LaunchCalendarController::class, 'index'])->name('launch-calendar');
 Route::get('/collections', [CollectionController::class, 'index'])->name('collections.index');
 Route::get('/collections/{slug}', [CollectionController::class, 'show'])->name('collections.show');
 

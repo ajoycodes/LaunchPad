@@ -159,9 +159,12 @@
                         </label>
                     </div>
                     <div class="form-field" id="launchDateWrap" style="display:none; margin-top:var(--space-3);">
-                        <label for="launch_date">Launch date</label>
-                        <input type="date" id="launch_date" name="launch_date"
-                               value="{{ old('launch_date') }}" min="{{ now()->addDay()->toDateString() }}">
+                        <label for="launch_date" class="form-label">Launch date &amp; time</label>
+                        <input type="datetime-local" id="launch_date" name="launch_date"
+                               class="form-control"
+                               value="{{ old('launch_date') }}"
+                               min="{{ now()->addDay()->format('Y-m-d\TH:i') }}">
+                        <span class="form-hint">Pick a future date when your product should go live.</span>
                         @error('launch_date')<span class="form-error">{{ $message }}</span>@enderror
                     </div>
                 </div>

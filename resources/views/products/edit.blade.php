@@ -165,7 +165,19 @@
                     </label>
                 </div>
 
-                <input type="hidden" name="launch_type" value="now">
+                <input type="hidden" name="launch_type"
+                       value="{{ $product->status === 'scheduled' ? 'scheduled' : 'now' }}">
+
+                @if($product->status === 'scheduled' && $product->launch_date)
+                    <div class="form-group">
+                        <label for="launch_date" class="form-label">Scheduled launch date &amp; time</label>
+                        <input type="datetime-local" id="launch_date" name="launch_date"
+                               class="form-control"
+                               value="{{ old('launch_date', $product->launch_date->format('Y-m-d\TH:i')) }}"
+                               min="{{ now()->format('Y-m-d\TH:i') }}">
+                        @error('launch_date')<span class="form-error">{{ $message }}</span>@enderror
+                    </div>
+                @endif
             </div>
 
             <div class="submit-actions">

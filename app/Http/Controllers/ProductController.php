@@ -48,7 +48,7 @@ class ProductController extends Controller
             'logo'             => $logoPath,
             'is_roast_enabled' => $request->boolean('is_roast_enabled'),
             'launch_date'      => $data['launch_type'] === 'scheduled' ? $data['launch_date'] : now(),
-            'status'           => 'pending',
+            'status'           => $data['launch_type'] === 'scheduled' ? 'scheduled' : 'pending',
         ]);
 
         if (!empty($data['tags'])) {

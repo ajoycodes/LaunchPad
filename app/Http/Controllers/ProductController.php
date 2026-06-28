@@ -89,7 +89,9 @@ class ProductController extends Controller
                 ->get()
             : collect();
 
-        return view('products.show', compact('product', 'comments', 'roastComments'));
+        $buildLog = $product->updates()->latest()->get();
+
+        return view('products.show', compact('product', 'comments', 'roastComments', 'buildLog'));
     }
 
     public function edit(Product $product)

@@ -229,6 +229,22 @@
                     </div>
                 @endif
 
+                {{-- Build log --}}
+                @if($buildLog->count())
+                    <div class="product-section" id="build-log">
+                        <h2>Build Log <span class="comment-count">({{ $buildLog->count() }})</span></h2>
+                        <div class="build-log">
+                            @foreach($buildLog as $entry)
+                                <div class="build-log__entry">
+                                    <div class="build-log__date">{{ $entry->created_at->format('M j') }}</div>
+                                    <div class="build-log__dot"></div>
+                                    <div class="build-log__body">{{ $entry->body }}</div>
+                                </div>
+                            @endforeach
+                        </div>
+                    </div>
+                @endif
+
             </main>
 
             <aside class="product-sidebar">

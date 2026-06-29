@@ -134,15 +134,17 @@
                         $winner = $past->votes_a >= $past->votes_b ? $past->productA : $past->productB;
                         $loser  = $past->votes_a >= $past->votes_b ? $past->productB : $past->productA;
                     @endphp
+                    @php
+                        $total      = $past->votes_a + $past->votes_b;
+                        $winnerPct  = $total > 0 ? round(($past->votes_a >= $past->votes_b ? $past->votes_a : $past->votes_b) / $total * 100) : 50;
+                        $loserPct   = 100 - $winnerPct;
+                    @endphp
                     <div class="past-battle">
                         <span class="past-battle__winner">
                             <i data-lucide="trophy" class="icon-inline" style="color:#CA8A04;"></i>
-                            {{ $winner->name }}
+                            {{ $winner->name }} ({{ $winnerPct }}%)
                         </span>
-                        <span class="text-muted past-battle__score">
-                            {{ $past->votes_a }} – {{ $past->votes_b }}
-                        </span>
-                        <span class="past-battle__loser text-muted">vs {{ $loser->name }}</span>
+                        <span class="past-battle__loser text-muted">vs {{ $loser->name }} ({{ $loserPct }}%)</span>
                         <span class="text-muted" style="font-size:.75rem; margin-left:auto;">
                             {{ $past->ends_at->diffForHumans() }}
                         </span>

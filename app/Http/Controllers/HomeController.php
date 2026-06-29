@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Battle;
 use App\Models\Category;
 use App\Models\Product;
 use App\Models\Tag;
@@ -63,9 +64,11 @@ class HomeController extends Controller
             ->limit(5)
             ->get();
 
+        $activeBattle = Battle::current();
+
         return view('home.index', compact(
             'products', 'categories', 'tab', 'search', 'catSlug',
-            'featured', 'popularTags', 'topMakers'
+            'featured', 'popularTags', 'topMakers', 'activeBattle'
         ));
     }
 }

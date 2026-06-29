@@ -93,6 +93,47 @@
         {{-- Sidebar --}}
         <aside class="feed-sidebar">
 
+            {{-- Battle widget --}}
+            @if($activeBattle)
+                <div class="sidebar-card sidebar-card--battle">
+                    <h3 class="sidebar-card__heading">
+                        <i data-lucide="swords" class="icon-inline"></i> Live Battle
+                    </h3>
+                    <div class="battle-widget">
+                        <div class="battle-widget__row">
+                            <a href="{{ route('products.show', $activeBattle->productA) }}" class="battle-widget__product">
+                                <div class="battle-widget__logo">
+                                    @if($activeBattle->productA->logo)
+                                        <img src="{{ Storage::url($activeBattle->productA->logo) }}" alt="{{ $activeBattle->productA->name }}">
+                                    @else
+                                        <span>{{ substr($activeBattle->productA->name, 0, 1) }}</span>
+                                    @endif
+                                </div>
+                                <span>{{ $activeBattle->productA->name }}</span>
+                            </a>
+                            <span class="battle-widget__vs">vs</span>
+                            <a href="{{ route('products.show', $activeBattle->productB) }}" class="battle-widget__product">
+                                <div class="battle-widget__logo">
+                                    @if($activeBattle->productB->logo)
+                                        <img src="{{ Storage::url($activeBattle->productB->logo) }}" alt="{{ $activeBattle->productB->name }}">
+                                    @else
+                                        <span>{{ substr($activeBattle->productB->name, 0, 1) }}</span>
+                                    @endif
+                                </div>
+                                <span>{{ $activeBattle->productB->name }}</span>
+                            </a>
+                        </div>
+                        <div class="battle-pct-bar" style="height:6px;">
+                            <div class="battle-pct-fill battle-pct-fill--a" style="width:{{ $activeBattle->percentA() }}%"></div>
+                        </div>
+                        <div class="battle-widget__meta">
+                            <span>{{ $activeBattle->votes_a }} vs {{ $activeBattle->votes_b }}</span>
+                            <a href="{{ route('battles.show') }}" class="btn-accent btn-xs">Vote →</a>
+                        </div>
+                    </div>
+                </div>
+            @endif
+
             {{-- Featured product --}}
             @if($featured)
                 <div class="sidebar-card">

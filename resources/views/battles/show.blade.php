@@ -53,11 +53,18 @@
 
                 <button class="btn-battle vote-btn"
                         data-side="a"
+                        aria-label="Vote for {{ $battle->productA->name }}"
                         {{ !auth()->check() ? 'disabled' : '' }}>
                     <i data-lucide="chevron-up" class="icon-inline"></i>
                     <span class="vote-label">{{ $userVote && $userVote->voted_for === 'a' ? 'Voted' : 'Vote' }}</span>
                     <span class="vote-count-a">{{ $battle->votes_a }}</span>
                 </button>
+                <div class="battle-card__pct" id="pctDisplayA">
+                    <span class="battle-pct-num">{{ $battle->percentA() }}%</span>
+                    <div class="battle-pct-bar">
+                        <div class="battle-pct-fill battle-pct-fill--a" style="width:{{ $battle->percentA() }}%"></div>
+                    </div>
+                </div>
             </div>
 
             {{-- VS divider + percentage bar --}}
@@ -93,11 +100,18 @@
 
                 <button class="btn-battle vote-btn"
                         data-side="b"
+                        aria-label="Vote for {{ $battle->productB->name }}"
                         {{ !auth()->check() ? 'disabled' : '' }}>
                     <i data-lucide="chevron-up" class="icon-inline"></i>
                     <span class="vote-label">{{ $userVote && $userVote->voted_for === 'b' ? 'Voted' : 'Vote' }}</span>
                     <span class="vote-count-b">{{ $battle->votes_b }}</span>
                 </button>
+                <div class="battle-card__pct" id="pctDisplayB">
+                    <span class="battle-pct-num">{{ $battle->percentB() }}%</span>
+                    <div class="battle-pct-bar">
+                        <div class="battle-pct-fill battle-pct-fill--b" style="width:{{ $battle->percentB() }}%"></div>
+                    </div>
+                </div>
             </div>
 
         </div>

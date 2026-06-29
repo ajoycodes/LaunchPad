@@ -3118,3 +3118,33 @@ a.comment__author:hover {
     flex-direction: row;
   }
 }
+
+/* Per-card percentage display */
+.battle-card__pct {
+  width: 100%;
+  text-align: center;
+}
+
+.battle-pct-num {
+  font-size: .8rem;
+  font-weight: 700;
+  color: var(--color-text-secondary);
+  display: block;
+  margin-bottom: 4px;
+}
+
+.battle-pct-bar {
+  height: 4px;
+  background: var(--color-border);
+  border-radius: 2px;
+  overflow: hidden;
+}
+
+.battle-pct-fill {
+  height: 100%;
+  border-radius: 2px;
+  transition: width .4s ease;
+}
+
+.battle-pct-fill--a { background: var(--color-accent); }
+.battle-pct-fill--b { background: #6366F1; }

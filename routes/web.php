@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
 use App\Http\Controllers\Auth\RegisteredUserController;
+use App\Http\Controllers\BattleController;
 use App\Http\Controllers\CollectionController;
 use App\Http\Controllers\CommentController;
 use App\Http\Controllers\DashboardController;
@@ -39,6 +40,10 @@ Route::get('/products/{product:slug}', [ProductController::class, 'show'])->name
 Route::get('/makers/{username}', [MakerController::class, 'show'])->name('makers.show');
 
 Route::get('/launch-calendar', [LaunchCalendarController::class, 'index'])->name('launch-calendar');
+Route::get('/battles/current', [BattleController::class, 'show'])->name('battles.show');
+Route::middleware('auth')->group(function () {
+    Route::post('/battles/{battle}/vote', [BattleController::class, 'vote'])->name('battles.vote');
+});
 Route::get('/collections', [CollectionController::class, 'index'])->name('collections.index');
 Route::get('/collections/{slug}', [CollectionController::class, 'show'])->name('collections.show');
 

@@ -10,6 +10,7 @@
     <ul class="site-nav__links">
       <li><a href="{{ url('/') }}">Home</a></li>
       <li><a href="{{ route('launch-calendar') }}">Launch Calendar</a></li>
+      <li><a href="{{ route('battles.show') }}">Battle</a></li>
       <li><a href="{{ url('/collections') }}">Collections</a></li>
     </ul>
 

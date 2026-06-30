@@ -216,6 +216,88 @@
 .admin-action-btn--ban     { border-color: #9333EA; color: #9333EA; }
 .admin-action-btn--ban:hover     { background: #FAF5FF; }
 
+/* User search form */
+.admin-search-form {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.admin-search-wrap {
+  position: relative;
+  flex: 1;
+  max-width: 480px;
+}
+
+.admin-search-icon {
+  position: absolute;
+  left: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 14px;
+  height: 14px;
+  color: var(--color-text-muted);
+  pointer-events: none;
+}
+
+.admin-search-input {
+  width: 100%;
+  padding: 8px 36px 8px 32px;
+  font-size: .875rem;
+  border: 1.5px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  background: var(--color-surface);
+  color: var(--color-text-body);
+  outline: none;
+  transition: border-color .12s ease;
+  box-sizing: border-box;
+}
+
+.admin-search-input:focus {
+  border-color: var(--color-accent);
+}
+
+.admin-search-clear {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--color-text-muted);
+  display: flex;
+  align-items: center;
+}
+
+.admin-search-clear svg {
+  width: 14px;
+  height: 14px;
+}
+
+.data-table__row--muted td {
+  opacity: .55;
+}
+
+/* Flash messages */
+.flash {
+  padding: 10px 16px;
+  border-radius: var(--radius-sm);
+  font-size: .875rem;
+  font-weight: 500;
+  margin-bottom: 16px;
+}
+
+.flash--success {
+  background: #F0FDF4;
+  color: #166534;
+  border: 1px solid #BBF7D0;
+}
+
+.flash--error {
+  background: #FFF1F2;
+  color: #991B1B;
+  border: 1px solid #FECACA;
+}
+
 @media (max-width: 900px) {
   .admin-layout {
     grid-template-columns: 1fr;

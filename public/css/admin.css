@@ -298,6 +298,94 @@
   border: 1px solid #FECACA;
 }
 
+/* Category management grid */
+.admin-categories-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 16px;
+}
+
+.admin-category-card {
+  background: var(--color-surface);
+  border: 1.5px solid var(--color-border);
+  border-radius: var(--radius-md);
+  padding: 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.admin-category-card--new {
+  border-style: dashed;
+}
+
+.admin-category-card__title {
+  font-size: .875rem;
+  font-weight: 700;
+  margin: 0;
+  color: var(--color-text-primary);
+}
+
+.admin-category-card__header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.admin-category-card__icon {
+  width: 16px;
+  height: 16px;
+  color: var(--color-accent);
+  flex-shrink: 0;
+}
+
+.admin-category-card__name {
+  font-size: .875rem;
+  font-weight: 600;
+  color: var(--color-text-primary);
+  flex: 1;
+}
+
+.admin-category-card__count {
+  font-size: .75rem;
+  color: var(--color-text-muted);
+}
+
+.admin-category-form {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.admin-category-form__fields {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.admin-input {
+  width: 100%;
+  padding: 8px 10px;
+  font-size: .8rem;
+  border: 1.5px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  background: var(--color-bg);
+  color: var(--color-text-body);
+  outline: none;
+  transition: border-color .12s ease;
+  box-sizing: border-box;
+}
+
+.admin-input:focus {
+  border-color: var(--color-accent);
+}
+
+.admin-error {
+  font-size: .75rem;
+  color: #DC2626;
+  margin: 0;
+}
+
 @media (max-width: 900px) {
   .admin-layout {
     grid-template-columns: 1fr;

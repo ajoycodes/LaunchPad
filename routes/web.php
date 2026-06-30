@@ -1,5 +1,10 @@
 <?php
 
+use App\Http\Controllers\Admin\AdminBattleController;
+use App\Http\Controllers\Admin\AdminCategoryController;
+use App\Http\Controllers\Admin\AdminDashboardController;
+use App\Http\Controllers\Admin\AdminProductController;
+use App\Http\Controllers\Admin\AdminUserController;
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
 use App\Http\Controllers\Auth\RegisteredUserController;
 use App\Http\Controllers\BattleController;
@@ -61,4 +66,23 @@ Route::middleware(['auth', 'maker'])->group(function () {
     Route::get('/products/{product:slug}/edit', [ProductController::class, 'edit'])->name('products.edit');
     Route::put('/products/{product:slug}', [ProductController::class, 'update'])->name('products.update');
     Route::delete('/products/{product:slug}', [ProductController::class, 'destroy'])->name('products.destroy');
+});
+
+Route::middleware(['auth', 'admin'])->prefix('admin')->name('admin.')->group(function () {
+    Route::get('/', [AdminDashboardController::class, 'index'])->name('dashboard');
+    Route::get('/products', [AdminProductController::class, 'index'])->name('products');
+    Route::post('/products/{product}/approve', [AdminProductController::class, 'approve'])->name('products.approve');
+    Route::post('/products/{product}/reject', [AdminProductController::class, 'reject'])->name('products.reject');
+    Route::post('/products/{product}/feature', [AdminProductController::class, 'feature'])->name('products.feature');
+    Route::delete('/products/{product}', [AdminProductController::class, 'destroy'])->name('products.destroy');
+    Route::get('/users', [AdminUserController::class, 'index'])->name('users');
+    Route::post('/users/{user}/ban', [AdminUserController::class, 'ban'])->name('users.ban');
+    Route::post('/users/{user}/make-admin', [AdminUserController::class, 'makeAdmin'])->name('users.make-admin');
+    Route::delete('/users/{user}', [AdminUserController::class, 'destroy'])->name('users.destroy');
+    Route::get('/categories', [AdminCategoryController::class, 'index'])->name('categories');
+    Route::post('/categories', [AdminCategoryController::class, 'store'])->name('categories.store');
+    Route::put('/categories/{category}', [AdminCategoryController::class, 'update'])->name('categories.update');
+    Route::delete('/categories/{category}', [AdminCategoryController::class, 'destroy'])->name('categories.destroy');
+    Route::get('/battles/create', [AdminBattleController::class, 'create'])->name('battles.create');
+    Route::post('/battles', [AdminBattleController::class, 'store'])->name('battles.store');
 });

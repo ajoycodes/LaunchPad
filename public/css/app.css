@@ -3241,3 +3241,71 @@ a.comment__author:hover {
   font-size: .75rem;
   color: var(--color-text-secondary);
 }
+
+/* ==========================================================================
+   Notifications
+   ========================================================================== */
+
+.notifications-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  border: 1.5px solid var(--color-border);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  background: var(--color-surface);
+}
+
+.notification-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 14px 18px;
+  border-bottom: 1px solid var(--color-border);
+  background: var(--color-surface);
+  transition: background-color .1s ease;
+}
+
+.notification-item:last-child {
+  border-bottom: none;
+}
+
+.notification-item--unread {
+  background: rgba(255, 97, 84, .04);
+}
+
+.notification-item__dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  flex-shrink: 0;
+  margin-top: 6px;
+  background: transparent;
+}
+
+.notification-item--unread .notification-item__dot {
+  background: var(--color-accent);
+}
+
+.notification-item__body {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  flex: 1;
+}
+
+.notification-item__message {
+  font-size: .875rem;
+  color: var(--color-text-body);
+  text-decoration: none;
+}
+
+a.notification-item__message:hover {
+  color: var(--color-accent);
+  text-decoration: underline;
+}
+
+.notification-item__time {
+  font-size: .75rem;
+  color: var(--color-text-muted);
+}

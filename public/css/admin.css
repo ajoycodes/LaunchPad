@@ -386,6 +386,64 @@
   margin: 0;
 }
 
+/* Admin form card (used on battle create, etc.) */
+.admin-form-card {
+  background: var(--color-surface);
+  border: 1.5px solid var(--color-border);
+  border-radius: var(--radius-md);
+  padding: 28px;
+  max-width: 780px;
+}
+
+.admin-form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.admin-form__row {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: flex-start;
+  gap: 16px;
+}
+
+.admin-form__group {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.admin-form__label {
+  font-size: .75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: .04em;
+  color: var(--color-text-secondary);
+}
+
+.admin-form__vs {
+  font-size: .875rem;
+  font-weight: 800;
+  color: var(--color-text-muted);
+  padding-top: 28px;
+  text-align: center;
+  white-space: nowrap;
+}
+
+.admin-select {
+  appearance: none;
+  cursor: pointer;
+}
+
+.admin-form__footer {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding-top: 8px;
+  border-top: 1px solid var(--color-border);
+}
+
 @media (max-width: 900px) {
   .admin-layout {
     grid-template-columns: 1fr;

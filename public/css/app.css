@@ -2397,17 +2397,35 @@ a.comment__author:hover {
 
 /* Empty state */
 .empty-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   text-align: center;
   padding: var(--space-10) var(--space-5);
   color: var(--color-text-secondary);
+  gap: var(--space-3);
 }
 
 .empty-state__icon {
   width: 48px;
   height: 48px;
   color: var(--color-border);
-  margin: 0 auto var(--space-4);
-  display: block;
+  margin-bottom: var(--space-2);
+  stroke-width: 1.25;
+}
+
+.empty-state__title {
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--color-text-primary);
+  margin: 0;
+}
+
+.empty-state__text {
+  font-size: .875rem;
+  color: var(--color-text-muted);
+  margin: 0;
+  max-width: 320px;
 }
 
 /* Radio option group */

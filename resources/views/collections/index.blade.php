@@ -17,7 +17,14 @@
     </div>
 
     @if($collections->isEmpty())
-        <p class="text-muted">No public collections yet. Be the first to create one!</p>
+        <div class="empty-state">
+            <i data-lucide="bookmark" class="empty-state__icon"></i>
+            <p class="empty-state__title">No collections yet</p>
+            <p class="empty-state__text">No collections yet. Create one to curate your favorites.</p>
+            @auth
+                <a href="{{ route('collections.create') }}" class="btn-accent btn-sm">Create a collection</a>
+            @endauth
+        </div>
     @else
         <div class="collection-grid">
             @foreach($collections as $collection)

@@ -71,7 +71,15 @@
                     </td>
                 </tr>
             @empty
-                <tr><td colspan="7" style="text-align:center; padding:32px; color:var(--color-text-muted);">No products.</td></tr>
+                <tr>
+                    <td colspan="7">
+                        <div class="empty-state" style="padding:40px 20px;">
+                            <i data-lucide="check-circle" class="empty-state__icon"></i>
+                            <p class="empty-state__title">All caught up</p>
+                            <p class="empty-state__text">No products pending review.</p>
+                        </div>
+                    </td>
+                </tr>
             @endforelse
         </tbody>
     </table>

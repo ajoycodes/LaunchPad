@@ -86,7 +86,8 @@
         @if($products->isEmpty())
             <div class="empty-state">
                 <i data-lucide="box" class="empty-state__icon"></i>
-                <p>No products yet.</p>
+                <p class="empty-state__title">Nothing here yet</p>
+                <p class="empty-state__text">You haven't launched anything yet. Start here and share your product with the world.</p>
                 @if(auth()->user()->isMaker() || auth()->user()->isAdmin())
                     <a href="{{ route('products.create') }}" class="btn-accent btn-sm">Submit your first product</a>
                 @endif

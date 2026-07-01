@@ -71,10 +71,13 @@
             </form>
 
             @if($products->isEmpty())
-                <div class="feed-empty">
-                    <i data-lucide="inbox" class="feed-empty__icon"></i>
-                    <p>No products here yet.</p>
-                    <a href="{{ route('products.create') }}" class="btn-accent">Be the first to launch</a>
+                <div class="empty-state">
+                    <i data-lucide="inbox" class="empty-state__icon"></i>
+                    <p class="empty-state__title">Nothing launched yet</p>
+                    <p class="empty-state__text">No products today. Be the first to launch something.</p>
+                    @auth
+                        <a href="{{ route('products.create') }}" class="btn-accent btn-sm">Submit a product</a>
+                    @endauth
                 </div>
             @else
                 <div class="feed-list">

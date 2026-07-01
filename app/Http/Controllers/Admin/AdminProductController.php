@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\ProductController;
+use App\Models\Notification;
 use App\Models\Product;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
@@ -42,12 +43,26 @@ class AdminProductController extends Controller
 
         ProductController::awardBadges($product->user);
 
+        Notification::send(
+            $product->user_id,
+            'approved',
+            "Your product "{$product->name}" has been approved and is now live!",
+            route('products.show', $product)
+        );
+
         return back()->with('success', "'{$product->name}' approved.");
     }
 
     public function reject(Product $product)
     {
         $product->update(['status' => 'rejected']);
+
+        Notification::send(
+            $product->user_id,
+            'rejected',
+            "Your product "{$product->name}" was not approved at this time.",
+            route('dashboard')
+        );
 
         return back()->with('success', "'{$product->name}' rejected.");
     }

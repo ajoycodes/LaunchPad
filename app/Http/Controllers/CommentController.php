@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Comment;
+use App\Models\Notification;
 use App\Models\Product;
 use Illuminate\Http\Request;
 
@@ -16,12 +17,23 @@ class CommentController extends Controller
             'is_roast'  => ['boolean'],
         ]);
 
+        $user = $request->user();
+
         $product->comments()->create([
-            'user_id'   => $request->user()->id,
+            'user_id'   => $user->id,
             'parent_id' => $data['parent_id'] ?? null,
             'body'      => $data['body'],
             'is_roast'  => $data['is_roast'] ?? false,
         ]);
+
+        if ($product->user_id !== $user->id) {
+            Notification::send(
+                $product->user_id,
+                'comment',
+                "{$user->name} commented on your product "{$product->name}".",
+                route('products.show', $product)
+            );
+        }
 
         return back()->with('success', 'Comment posted.');
     }

@@ -17,6 +17,13 @@
     {{-- Auth buttons (right) --}}
     <div class="site-nav__auth">
       @auth
+        @php $unreadCount = auth()->user()->unreadNotificationsCount(); @endphp
+        <a href="{{ route('notifications') }}" class="btn-ghost nav-bell" title="Notifications">
+            <i data-lucide="bell" class="icon-inline"></i>
+            @if($unreadCount > 0)
+                <span class="nav-bell__badge">{{ $unreadCount > 99 ? '99+' : $unreadCount }}</span>
+            @endif
+        </a>
         <a href="{{ route('profile.edit') }}" class="btn-ghost">
             <i data-lucide="settings" class="icon-inline"></i> Settings
         </a>

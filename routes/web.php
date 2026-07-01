@@ -14,6 +14,7 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\LaunchCalendarController;
 use App\Http\Controllers\MakerController;
+use App\Http\Controllers\NotificationController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProductUpdateController;
 use App\Http\Controllers\ProfileController;
@@ -39,6 +40,7 @@ Route::middleware('auth')->group(function () {
     Route::put('/settings/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
     Route::post('/dashboard/updates', [ProductUpdateController::class, 'store'])->name('dashboard.updates.store');
+    Route::get('/notifications', [NotificationController::class, 'index'])->name('notifications');
 });
 
 Route::get('/products/{product:slug}', [ProductController::class, 'show'])->name('products.show');

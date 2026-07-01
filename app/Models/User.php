@@ -90,4 +90,14 @@ class User extends Authenticatable
     {
         return $this->hasMany(Collection::class)->orderByDesc('created_at');
     }
+
+    public function notifications()
+    {
+        return $this->hasMany(Notification::class)->orderByDesc('created_at');
+    }
+
+    public function unreadNotificationsCount(): int
+    {
+        return $this->notifications()->where('is_read', false)->count();
+    }
 }

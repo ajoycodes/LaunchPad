@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Badge;
+use App\Models\Notification;
 use App\Models\Product;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
@@ -20,6 +21,15 @@ class UpvoteController extends Controller
         } else {
             $product->upvotes()->create(['user_id' => $user->id]);
             $upvoted = true;
+
+            if ($product->user_id !== $user->id) {
+                Notification::send(
+                    $product->user_id,
+                    'upvote',
+                    "{$user->name} upvoted your product "{$product->name}".",
+                    route('products.show', $product)
+                );
+            }
 
             $this->maybeAwardTop5Badge($product);
             $this->maybeAwardCommunityFavBadge($product);

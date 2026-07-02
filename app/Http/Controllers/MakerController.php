@@ -20,8 +20,13 @@ class MakerController extends Controller
 
         $badges = $maker->badges;
 
+        $publicCollections = $maker->collections()
+            ->where('is_public', true)
+            ->withCount('products')
+            ->get();
+
         $totalUpvotes = $products->sum('upvotes_count');
 
-        return view('makers.profile', compact('maker', 'products', 'badges', 'totalUpvotes'));
+        return view('makers.profile', compact('maker', 'products', 'badges', 'publicCollections', 'totalUpvotes'));
     }
 }

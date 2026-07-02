@@ -24,6 +24,10 @@
 <body>
     @include('partials.navbar')
 
+    <div class="flash-stack">
+        @include('partials.flash')
+    </div>
+
     <main class="site-main">
         @yield('content')
     </main>
@@ -41,6 +45,21 @@
 
     @stack('scripts')
 
-    <script>lucide.createIcons();</script>
+    <script>
+    lucide.createIcons();
+    (function () {
+        document.querySelectorAll('[data-auto-dismiss]').forEach(function (el) {
+            var t = setTimeout(function () { dismiss(el); }, 4000);
+            el.querySelector('.flash-toast__close').addEventListener('click', function () {
+                clearTimeout(t);
+                dismiss(el);
+            });
+        });
+        function dismiss(el) {
+            el.classList.add('flash-toast--out');
+            el.addEventListener('transitionend', function () { el.remove(); });
+        }
+    }());
+    </script>
 </body>
 </html>

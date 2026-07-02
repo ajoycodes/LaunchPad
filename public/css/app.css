@@ -3453,6 +3453,42 @@ a.notification-item__message:hover {
    Mobile responsiveness (375px viewport)
    ========================================================================== */
 
+/* ==========================================================================
+   Global focus states (accessibility)
+   ========================================================================== */
+
+:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 2px;
+  border-radius: 3px;
+}
+
+button:focus-visible,
+a:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 2px;
+}
+
+/* Smooth scroll */
+html {
+  scroll-behavior: smooth;
+}
+
+/* All images have descriptive display */
+img {
+  max-width: 100%;
+  display: block;
+}
+
+/* Upvote button loading state */
+.upvote-btn[data-loading] {
+  opacity: .6;
+  pointer-events: none;
+}
+
 @media (max-width: 480px) {
   .container-app {
     padding-inline: 16px;

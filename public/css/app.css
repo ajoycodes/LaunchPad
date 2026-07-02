@@ -3327,3 +3327,45 @@ a.notification-item__message:hover {
   font-size: .75rem;
   color: var(--color-text-muted);
 }
+
+/* ==========================================================================
+   Error pages
+   ========================================================================== */
+
+.error-page {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 60vh;
+  padding-block: var(--space-10);
+}
+
+.error-page__inner {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-4);
+  max-width: 440px;
+}
+
+.error-page__code {
+  font-size: 6rem;
+  font-weight: 800;
+  color: var(--color-border);
+  line-height: 1;
+}
+
+.error-page__title {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--color-text-primary);
+  margin: 0;
+}
+
+.error-page__message {
+  font-size: .9375rem;
+  color: var(--color-text-muted);
+  margin: 0;
+  line-height: 1.6;
+}

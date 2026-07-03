@@ -26,7 +26,7 @@ class UpvoteController extends Controller
                 Notification::send(
                     $product->user_id,
                     'upvote',
-                    "{$user->name} upvoted your product "{$product->name}".",
+                    "{$user->name} upvoted your product '{$product->name}'.",
                     route('products.show', $product)
                 );
             }

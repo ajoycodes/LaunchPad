@@ -27,7 +27,7 @@ class AdminCategoryController extends Controller
 
         Category::create($data);
 
-        return back()->with('success', "Category "{$data['name']}" created.");
+        return back()->with('success', "Category '{$data['name']}' created.");
     }
 
     public function update(Request $request, Category $category)

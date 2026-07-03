@@ -30,7 +30,7 @@ class CommentController extends Controller
             Notification::send(
                 $product->user_id,
                 'comment',
-                "{$user->name} commented on your product "{$product->name}".",
+                "{$user->name} commented on your product '{$product->name}'.",
                 route('products.show', $product)
             );
         }

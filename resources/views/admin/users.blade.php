@@ -96,7 +96,7 @@
             @empty
                 <tr>
                     <td colspan="7" style="text-align:center; padding:32px; color:var(--color-text-muted);">
-                        No users found{{ $search ? " for "{$search}"" : '' }}.
+                        No users found{{ $search ? " for '{$search}'" : '' }}.
                     </td>
                 </tr>
             @endforelse

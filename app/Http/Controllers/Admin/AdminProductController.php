@@ -46,7 +46,7 @@ class AdminProductController extends Controller
         Notification::send(
             $product->user_id,
             'approved',
-            "Your product "{$product->name}" has been approved and is now live!",
+            "Your product '{$product->name}' has been approved and is now live!",
             route('products.show', $product)
         );
 
@@ -60,7 +60,7 @@ class AdminProductController extends Controller
         Notification::send(
             $product->user_id,
             'rejected',
-            "Your product "{$product->name}" was not approved at this time.",
+            "Your product '{$product->name}' was not approved at this time.",
             route('dashboard')
         );
 

@@ -26,11 +26,7 @@
             @foreach($products as $product)
                 <div class="calendar-item" data-launch="{{ $product->launch_date->toIso8601String() }}">
                     <div class="calendar-item__logo">
-                        @if($product->logo)
-                            <img src="{{ Storage::url($product->logo) }}" alt="{{ $product->name }}">
-                        @else
-                            <i data-lucide="box" class="calendar-item__logo-placeholder"></i>
-                        @endif
+                        <x-product-logo :product="$product" size="sm" />
                     </div>
 
                     <div class="calendar-item__info">

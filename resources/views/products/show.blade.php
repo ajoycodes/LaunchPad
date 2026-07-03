@@ -9,11 +9,7 @@
         {{-- Header --}}
         <div class="product-header">
             <div class="product-header__logo">
-                @if($product->logo)
-                    <img src="{{ Storage::url($product->logo) }}" alt="{{ $product->name }} logo">
-                @else
-                    <i data-lucide="box" class="product-header__logo-placeholder"></i>
-                @endif
+                <x-product-logo :product="$product" size="lg" />
             </div>
 
             <div class="product-header__info">
@@ -146,11 +142,7 @@
                             <input type="hidden" name="is_roast" value="0">
                             <div class="comment-form__inner">
                                 <div class="comment-form__avatar">
-                                    @if(auth()->user()->avatar)
-                                        <img src="{{ Storage::url(auth()->user()->avatar) }}" alt="">
-                                    @else
-                                        <span>{{ strtoupper(substr(auth()->user()->name, 0, 1)) }}</span>
-                                    @endif
+                                    <x-avatar :user="auth()->user()" size="sm" />
                                 </div>
                                 <div class="comment-form__fields">
                                     <textarea name="body" rows="3" maxlength="1000"
@@ -196,11 +188,7 @@
                                 <input type="hidden" name="is_roast" value="1">
                                 <div class="comment-form__inner">
                                     <div class="comment-form__avatar">
-                                        @if(auth()->user()->avatar)
-                                            <img src="{{ Storage::url(auth()->user()->avatar) }}" alt="">
-                                        @else
-                                            <span>{{ strtoupper(substr(auth()->user()->name, 0, 1)) }}</span>
-                                        @endif
+                                        <x-avatar :user="auth()->user()" size="sm" />
                                     </div>
                                     <div class="comment-form__fields">
                                         <textarea name="body" rows="3" maxlength="1000"
@@ -254,15 +242,11 @@
                     <h3 class="sidebar-card__heading">Made by</h3>
                     <a href="{{ route('makers.show', $product->user->username) }}" class="maker-card maker-card--link">
                         <div class="maker-card__avatar">
-                            @if($product->user->avatar)
-                                <img src="{{ Storage::url($product->user->avatar) }}" alt="{{ $product->user->name }}">
-                            @else
-                                <span>{{ strtoupper(substr($product->user->name, 0, 1)) }}</span>
-                            @endif
+                            <x-avatar :user="$product->user" size="md" />
                         </div>
                         <div class="maker-card__info">
                             <strong>{{ $product->user->name }}</strong>
-                            <span class="text-muted">@{{ $product->user->username }}</span>
+                            <span class="text-muted">{{ '@' . $product->user->username }}</span>
                         </div>
                     </a>
                     @if($product->user->bio)

@@ -39,11 +39,7 @@
             {{-- Product A --}}
             <div class="battle-card {{ $userVote && $userVote->voted_for === 'a' ? 'battle-card--voted' : '' }}" id="cardA">
                 <div class="battle-card__logo">
-                    @if($battle->productA->logo)
-                        <img src="{{ Storage::url($battle->productA->logo) }}" alt="{{ $battle->productA->name }}">
-                    @else
-                        <i data-lucide="box"></i>
-                    @endif
+                    <x-product-logo :product="$battle->productA" size="lg" />
                 </div>
                 <h2 class="battle-card__name">
                     <a href="{{ route('products.show', $battle->productA) }}">{{ $battle->productA->name }}</a>
@@ -86,11 +82,7 @@
             {{-- Product B --}}
             <div class="battle-card {{ $userVote && $userVote->voted_for === 'b' ? 'battle-card--voted' : '' }}" id="cardB">
                 <div class="battle-card__logo">
-                    @if($battle->productB->logo)
-                        <img src="{{ Storage::url($battle->productB->logo) }}" alt="{{ $battle->productB->name }}">
-                    @else
-                        <i data-lucide="box"></i>
-                    @endif
+                    <x-product-logo :product="$battle->productB" size="lg" />
                 </div>
                 <h2 class="battle-card__name">
                     <a href="{{ route('products.show', $battle->productB) }}">{{ $battle->productB->name }}</a>

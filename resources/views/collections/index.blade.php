@@ -39,11 +39,7 @@
                     <div class="collection-card__footer">
                         <div class="collection-card__curator">
                             <div class="collection-card__avatar">
-                                @if($collection->user->avatar)
-                                    <img src="{{ Storage::url($collection->user->avatar) }}" alt="{{ $collection->user->name }}">
-                                @else
-                                    <span>{{ strtoupper(substr($collection->user->name, 0, 1)) }}</span>
-                                @endif
+                                <x-avatar :user="$collection->user" size="sm" />
                             </div>
                             <span>{{ $collection->user->name }}</span>
                         </div>

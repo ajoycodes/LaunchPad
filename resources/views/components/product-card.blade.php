@@ -11,11 +11,7 @@
 
     {{-- Logo --}}
     <div class="product-card__logo">
-        @if($product->logo)
-            <img src="{{ Storage::url($product->logo) }}" alt="{{ $product->name }}">
-        @else
-            <i data-lucide="box" class="product-card__logo-icon"></i>
-        @endif
+        <x-product-logo :product="$product" size="md" />
     </div>
 
     {{-- Body --}}

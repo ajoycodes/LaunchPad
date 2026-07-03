@@ -2,11 +2,14 @@
 
 namespace App\Models;
 
+use App\Models\Concerns\HasTileAvatar;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Str;
 
 class Product extends Model
 {
+    use HasTileAvatar;
+
     protected $fillable = [
         'user_id', 'name', 'slug', 'tagline', 'description',
         'logo', 'category_id', 'website_url', 'demo_url', 'github_url',

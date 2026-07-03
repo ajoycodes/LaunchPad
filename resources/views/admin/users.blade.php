@@ -50,7 +50,7 @@
                         <a href="{{ route('makers.show', $user->username) }}" target="_blank" class="data-table__product-name">
                             {{ $user->name }}
                         </a>
-                        <div style="font-size:.75rem; color:var(--color-text-muted);">@{{ $user->username }}</div>
+                        <div style="font-size:.75rem; color:var(--color-text-muted);">{{ '@' . $user->username }}</div>
                     </td>
                     <td style="font-size:.85rem;">{{ $user->email }}</td>
                     <td>

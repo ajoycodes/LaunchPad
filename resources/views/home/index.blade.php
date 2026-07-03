@@ -106,22 +106,14 @@
                         <div class="battle-widget__row">
                             <a href="{{ route('products.show', $activeBattle->productA) }}" class="battle-widget__product">
                                 <div class="battle-widget__logo">
-                                    @if($activeBattle->productA->logo)
-                                        <img src="{{ Storage::url($activeBattle->productA->logo) }}" alt="{{ $activeBattle->productA->name }}">
-                                    @else
-                                        <span>{{ substr($activeBattle->productA->name, 0, 1) }}</span>
-                                    @endif
+                                    <x-product-logo :product="$activeBattle->productA" size="sm" />
                                 </div>
                                 <span>{{ $activeBattle->productA->name }}</span>
                             </a>
                             <span class="battle-widget__vs">vs</span>
                             <a href="{{ route('products.show', $activeBattle->productB) }}" class="battle-widget__product">
                                 <div class="battle-widget__logo">
-                                    @if($activeBattle->productB->logo)
-                                        <img src="{{ Storage::url($activeBattle->productB->logo) }}" alt="{{ $activeBattle->productB->name }}">
-                                    @else
-                                        <span>{{ substr($activeBattle->productB->name, 0, 1) }}</span>
-                                    @endif
+                                    <x-product-logo :product="$activeBattle->productB" size="sm" />
                                 </div>
                                 <span>{{ $activeBattle->productB->name }}</span>
                             </a>
@@ -143,11 +135,7 @@
                     <h3 class="sidebar-card__heading">Featured</h3>
                     <a href="{{ route('products.show', $featured) }}" class="featured-card">
                         <div class="featured-card__logo">
-                            @if($featured->logo)
-                                <img src="{{ Storage::url($featured->logo) }}" alt="{{ $featured->name }}">
-                            @else
-                                <i data-lucide="box"></i>
-                            @endif
+                            <x-product-logo :product="$featured" size="md" />
                         </div>
                         <div class="featured-card__body">
                             <div class="featured-card__name">{{ $featured->name }}</div>
@@ -166,11 +154,7 @@
                             <a href="{{ route('makers.show', $maker->username) }}" class="sidebar-maker sidebar-maker--link">
                                 <span class="sidebar-maker__rank">{{ $i + 1 }}</span>
                                 <div class="sidebar-maker__avatar">
-                                    @if($maker->avatar)
-                                        <img src="{{ Storage::url($maker->avatar) }}" alt="{{ $maker->name }}">
-                                    @else
-                                        <span>{{ strtoupper(substr($maker->name, 0, 1)) }}</span>
-                                    @endif
+                                    <x-avatar :user="$maker" size="sm" />
                                 </div>
                                 <div class="sidebar-maker__info">
                                     <span class="sidebar-maker__name">{{ $maker->name }}</span>

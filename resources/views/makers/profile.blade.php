@@ -10,15 +10,11 @@
         <div class="container-app">
             <div class="maker-cover__inner">
                 <div class="maker-cover__avatar">
-                    @if($maker->avatar)
-                        <img src="{{ Storage::url($maker->avatar) }}" alt="{{ $maker->name }}">
-                    @else
-                        <span>{{ strtoupper(substr($maker->name, 0, 1)) }}</span>
-                    @endif
+                    <x-avatar :user="$maker" size="xl" />
                 </div>
                 <div class="maker-cover__info">
                     <h1 class="maker-cover__name">{{ $maker->name }}</h1>
-                    <p class="maker-cover__username text-muted">@{{ $maker->username }}</p>
+                    <p class="maker-cover__username text-muted">{{ '@' . $maker->username }}</p>
                     @if($maker->bio)
                         <p class="maker-cover__bio">{{ $maker->bio }}</p>
                     @endif
@@ -30,7 +26,7 @@
                         @endif
                         @if($maker->twitter)
                             <a href="https://twitter.com/{{ ltrim($maker->twitter, '@') }}" target="_blank" rel="noopener" class="maker-link">
-                                <i data-lucide="twitter" class="icon-inline"></i> @{{ ltrim($maker->twitter, '@') }}
+                                <i data-lucide="twitter" class="icon-inline"></i> {{ '@' . ltrim($maker->twitter, '@') }}
                             </a>
                         @endif
                     </div>

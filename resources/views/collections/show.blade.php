@@ -20,11 +20,7 @@
             <div class="collection-header__meta">
                 <a href="{{ route('makers.show', $collection->user->username) }}" class="collection-header__curator">
                     <div class="collection-card__avatar">
-                        @if($collection->user->avatar)
-                            <img src="{{ Storage::url($collection->user->avatar) }}" alt="{{ $collection->user->name }}">
-                        @else
-                            <span>{{ strtoupper(substr($collection->user->name, 0, 1)) }}</span>
-                        @endif
+                        <x-avatar :user="$collection->user" size="sm" />
                     </div>
                     <span>by {{ $collection->user->name }}</span>
                 </a>

@@ -35,14 +35,16 @@
                         <label class="role-option">
                             <input type="radio" name="role" value="maker" @checked(old('role') === 'maker')>
                             <span class="role-option__body">
-                                <strong>🛠 Maker</strong>
+                                <span class="role-option__icon"><i data-lucide="hammer"></i></span>
+                                <strong>Maker</strong>
                                 <small>I build and launch products.</small>
                             </span>
                         </label>
                         <label class="role-option">
                             <input type="radio" name="role" value="hunter" @checked(old('role', 'hunter') === 'hunter')>
                             <span class="role-option__body">
-                                <strong>🔍 Hunter</strong>
+                                <span class="role-option__icon"><i data-lucide="search"></i></span>
+                                <strong>Hunter</strong>
                                 <small>I discover and upvote products.</small>
                             </span>
                         </label>

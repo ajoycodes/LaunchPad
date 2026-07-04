@@ -119,7 +119,7 @@
                 <div class="product-description">
                     <h2>About {{ $product->name }}</h2>
                     <div class="product-description__body">
-                        {!! nl2br(e($product->description)) !!}
+                        {!! Str::markdown($product->description ?? '', ['html_input' => 'escape', 'allow_unsafe_links' => false]) !!}
                     </div>
                 </div>
 

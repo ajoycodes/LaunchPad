@@ -189,25 +189,53 @@ class DemoSeeder extends Seeder
             );
         }
 
-        // Scheduled products (launch calendar)
-        $scheduledData = [
-            ['NightOwl Analytics', 'Privacy-first analytics that respect your users', 'developer-tools',     2, 2],
-            ['MealPlanr',          'Weekly meal plans from what is in your fridge',   'ai-machine-learning', 5, 4],
-            ['FreelanceFlow',      'Contracts, invoices, and time tracking in one',   'productivity',        8, 7],
-            ['BrandBoard',         'Moodboards that export straight to design tokens','design',              1, 10],
+        // Scheduled products (launch calendar) — keep the calendar well populated
+        // with 50+ upcoming launches, every one at least a month out.
+        $schedPrefixes = ['Nova', 'Pulse', 'Flux', 'Zenith', 'Orbit', 'Vertex', 'Lumen', 'Quanta', 'Ember', 'Slate', 'Drift', 'Aero', 'Cobalt', 'Signal', 'Cascade', 'Nimbus', 'Beacon', 'Atlas', 'Halo', 'Vivid', 'Nexus', 'Prism', 'Onyx', 'Cinder', 'Metric', 'Canvas', 'Ripple', 'Summit'];
+        $schedSuffixes = ['Labs', 'Flow', 'Kit', 'HQ', 'Hub', 'Loop', 'Deck', 'Stack', 'Grid', 'Sync', 'Craft', 'Works', 'Board', 'Pilot', 'Scope'];
+        $schedTaglines = [
+            'The simplest way to ship your next idea',
+            'Automate the busywork and focus on building',
+            'Analytics that respect your users\' privacy',
+            'Collaborate with your team in real time',
+            'Turn scattered notes into a clear plan',
+            'Beautiful reports without the spreadsheet',
+            'Everything your side project needs to launch',
+            'Track what matters and ignore the noise',
+            'Design handoffs that actually work',
+            'Grow your audience without the burnout',
+            'Your whole workflow, finally in one place',
+            'Ship faster with fewer moving parts',
         ];
-        foreach ($scheduledData as [$name, $tagline, $catSlug, $makerIdx, $daysAhead]) {
+
+        $catSlugs = $categories->keys();
+        $target   = 52;
+        $prefixCount = count($schedPrefixes);
+
+        for ($i = 0; $i < $target; $i++) {
+            $name = $schedPrefixes[$i % $prefixCount] . $schedSuffixes[intdiv($i, $prefixCount) % count($schedSuffixes)];
+            $slug = Str::slug($name);
+
+            // Never overwrite an existing (e.g. approved) product.
+            if (isset($approvedProducts[$slug])) {
+                continue;
+            }
+
+            $makerIdx = $i % count($makers);
+            $tagline  = $schedTaglines[$i % count($schedTaglines)];
+
             Product::updateOrCreate(
-                ['slug' => Str::slug($name)],
+                ['slug' => $slug],
                 [
                     'user_id'     => $makers[$makerIdx]->id,
-                    'category_id' => $categories->get($catSlug)?->id,
+                    'category_id' => $categories->get($catSlugs[$i % $catSlugs->count()])?->id,
                     'name'        => $name,
                     'tagline'     => $tagline,
                     'description' => $this->description($name, $tagline, $makers[$makerIdx]->name),
-                    'website_url' => 'https://example.com/' . Str::slug($name),
+                    'website_url' => 'https://example.com/' . $slug,
                     'status'      => 'scheduled',
-                    'launch_date' => now()->addDays($daysAhead)->setTime(rand(8, 16), 0),
+                    // At least one month out, spread across the following ~4 months.
+                    'launch_date' => now()->addDays(rand(31, 160))->setTime(rand(8, 18), rand(0, 59)),
                 ]
             );
         }

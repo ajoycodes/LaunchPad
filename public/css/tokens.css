@@ -1,17 +1,57 @@
+/* ============================================================================
+   LaunchPad Design Tokens
+   Single source of truth for color, type, spacing, radius, elevation, and
+   control sizing. Components must reference these variables — never hardcode
+   values that exist here.
+   ========================================================================== */
+
 :root {
+  /* --------------------------------------------------------------------- */
+  /* Color                                                                  */
+  /* --------------------------------------------------------------------- */
   --color-bg: #FFFFFF;
   --color-surface: #F9F9F7;
   --color-border: #E8E8E3;
+
   --color-text-primary: #1A1A1A;
   --color-text-body: #3D3D3D;
   --color-text-muted: #9A9A9A;
+
   --color-accent: #FF6154;
   --color-accent-hover: #E5554A;
   --color-accent-soft: #FFF1F0;
+
   --color-success: #22C55E;
   --color-warning: #F59E0B;
+  --color-danger: #DC2626;
+  --color-danger-soft: #FEF2F2;
+  --color-danger-border: #FECACA;
+
   --color-dark: #111111;
 
+  /* --------------------------------------------------------------------- */
+  /* Typography — the only font sizes/weights components should use         */
+  /* --------------------------------------------------------------------- */
+  --text-xs: .78rem;    /* fine print, badges, uppercase labels */
+  --text-sm: .85rem;    /* secondary text, small buttons        */
+  --text-base: .95rem;  /* body copy, inputs, buttons           */
+  --text-md: 1.05rem;   /* emphasized body, card names          */
+  --text-lg: 1.2rem;    /* h3 / card headings                   */
+  --text-xl: 1.35rem;   /* h2 / section headings                */
+  --text-2xl: 1.6rem;   /* h1 / page titles                     */
+  --text-3xl: 2rem;     /* hero numbers, stats                  */
+
+  --weight-medium: 500;
+  --weight-semibold: 600;
+  --weight-bold: 700;
+
+  --leading-tight: 1.2;     /* headings   */
+  --leading-normal: 1.55;   /* UI copy    */
+  --leading-relaxed: 1.7;   /* long-form  */
+
+  /* --------------------------------------------------------------------- */
+  /* Shape & elevation                                                      */
+  /* --------------------------------------------------------------------- */
   --radius-sm: 6px;
   --radius-md: 10px;
   --radius-lg: 16px;
@@ -21,10 +61,22 @@
   --shadow-md: 0 4px 12px rgba(0,0,0,0.08);
   --shadow-lg: 0 8px 32px rgba(0,0,0,0.10);
 
+  --focus-ring: 0 0 0 3px var(--color-accent-soft);
+
+  /* --------------------------------------------------------------------- */
+  /* Spacing & layout                                                       */
+  /* --------------------------------------------------------------------- */
   --space-1: 4px; --space-2: 8px; --space-3: 12px;
   --space-4: 16px; --space-5: 24px; --space-6: 32px;
   --space-7: 48px; --space-8: 64px;
 
   --container-max: 1100px;
   --container-pad: 0 24px;
+
+  /* --------------------------------------------------------------------- */
+  /* Controls — buttons and inputs share these heights                      */
+  /* --------------------------------------------------------------------- */
+  --control-h-xs: 26px;
+  --control-h-sm: 32px;
+  --control-h: 40px;
 }

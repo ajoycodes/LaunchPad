@@ -8,10 +8,6 @@
         <div class="auth-split__card">
 
             <div class="auth-split__form-col">
-                <div class="auth-split__brand">
-                    <i data-lucide="rocket"></i> LaunchPad
-                </div>
-
                 <div class="auth-split__form">
                     <h1 class="auth-split__title">Welcome back</h1>
                     <p class="auth-split__subtitle">Enter your email and password to access your account.</p>
@@ -21,13 +17,13 @@
 
                         <div class="form-field">
                             <label for="email">Email</label>
-                            <input id="email" type="email" name="email" value="{{ old('email') }}" required autofocus>
+                            <input id="email" type="email" name="email" value="{{ old('email') }}" placeholder="you@example.com" required autofocus>
                             @error('email') <span class="form-error">{{ $message }}</span> @enderror
                         </div>
 
                         <div class="form-field">
                             <label for="password">Password</label>
-                            <input id="password" type="password" name="password" required autocomplete="current-password">
+                            <input id="password" type="password" name="password" placeholder="Your password" required autocomplete="current-password">
                             @error('password') <span class="form-error">{{ $message }}</span> @enderror
                         </div>
 
@@ -51,6 +47,10 @@
             </div>
 
             <aside class="auth-split__promo" aria-hidden="true">
+                <div class="auth-split__brand auth-split__brand--light">
+                    <i data-lucide="rocket"></i> LaunchPad
+                </div>
+
                 <h2 class="auth-split__promo-title">Where makers launch and the community decides what wins.</h2>
                 <p class="auth-split__promo-sub">Log in to upvote, comment, and ship your next product.</p>
 

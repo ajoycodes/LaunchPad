@@ -381,6 +381,21 @@ a:hover {
   color: var(--color-accent);
 }
 
+/* Brand shown on the coral promo panel: white, pinned to the top while the
+   promo content stays vertically centered. */
+.auth-split__brand--light {
+  color: #fff;
+  margin-bottom: auto;
+}
+
+.auth-split__brand--light .lucide {
+  color: #fff;
+}
+
+.auth-split__promo .auth-split__promo-title {
+  margin-top: auto;
+}
+
 .auth-split__form {
   width: 100%;
   max-width: 400px;
@@ -577,10 +592,12 @@ a:hover {
 .form-field input[type="text"],
 .form-field input[type="email"],
 .form-field input[type="password"] {
+  width: 100%;
+  height: var(--control-h);
   border: 1.5px solid var(--color-border);
   border-radius: var(--radius-md);
-  padding: 10px var(--space-3);
-  font-size: .95rem;
+  padding: 0 var(--space-3);
+  font-size: var(--text-base);
   font-family: inherit;
   color: var(--color-text-primary);
   background-color: var(--color-bg);
@@ -591,6 +608,13 @@ a:hover {
   outline: none;
   border-color: var(--color-accent);
   box-shadow: 0 0 0 3px var(--color-accent-soft);
+}
+
+/* Placeholders everywhere: present but quiet */
+input::placeholder,
+textarea::placeholder {
+  color: var(--color-text-muted);
+  opacity: .55;
 }
 
 .form-error {
@@ -608,6 +632,7 @@ a:hover {
 .role-option {
   position: relative;
   cursor: pointer;
+  display: flex; /* body stretches so both cards share the tallest height */
 }
 
 .role-option input {
@@ -615,13 +640,12 @@ a:hover {
   opacity: 0;
 }
 
-/* Compact horizontal card: icon chip left, label + description right */
+/* Compact card: label with description underneath */
 .role-option__body {
-  display: grid;
-  grid-template-columns: auto 1fr;
-  align-items: center;
-  column-gap: var(--space-3);
-  row-gap: 1px;
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+  flex: 1;
   text-align: left;
   border: 1.5px solid var(--color-border);
   border-radius: var(--radius-md);
@@ -633,31 +657,12 @@ a:hover {
   border-color: var(--color-text-muted);
 }
 
-.role-option__icon {
-  grid-row: 1 / 3;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 32px;
-  height: 32px;
-  border-radius: var(--radius-full);
-  background: var(--color-surface);
-  color: var(--color-text-body);
-  transition: background-color .15s ease, color .15s ease;
-}
-
-.role-option__icon svg {
-  width: 16px;
-  height: 16px;
-}
-
 .role-option__body strong {
   font-size: var(--text-sm);
   line-height: 1.3;
 }
 
 .role-option__body small {
-  grid-column: 2;
   color: var(--color-text-muted);
   font-size: var(--text-xs);
   line-height: 1.35;
@@ -666,11 +671,6 @@ a:hover {
 .role-option input:checked + .role-option__body {
   border-color: var(--color-accent);
   background-color: var(--color-accent-soft);
-}
-
-.role-option input:checked + .role-option__body .role-option__icon {
-  background: var(--color-accent);
-  color: #fff;
 }
 
 .role-option input:focus-visible + .role-option__body {
@@ -3053,7 +3053,9 @@ a.comment__author:hover {
 .build-log::before {
   content: '';
   position: absolute;
-  left: 68px;
+  /* Center of the dot column (52px date + 8px gap + half of 32px = 76px),
+     minus half the 2px line width. */
+  left: 75px;
   top: 8px;
   bottom: 8px;
   width: 2px;

@@ -8,10 +8,6 @@
         <div class="auth-split__card">
 
             <div class="auth-split__form-col">
-                <div class="auth-split__brand">
-                    <i data-lucide="rocket"></i> LaunchPad
-                </div>
-
                 <div class="auth-split__form">
                     <h1 class="auth-split__title">Create your account</h1>
                     <p class="auth-split__subtitle">Join the makers shipping on LaunchPad.</p>
@@ -22,20 +18,20 @@
                         <div class="form-row">
                             <div class="form-field">
                                 <label for="name">Name</label>
-                                <input id="name" type="text" name="name" value="{{ old('name') }}" required autofocus>
+                                <input id="name" type="text" name="name" value="{{ old('name') }}" placeholder="Your name" required autofocus>
                                 @error('name') <span class="form-error">{{ $message }}</span> @enderror
                             </div>
 
                             <div class="form-field">
                                 <label for="username">Username</label>
-                                <input id="username" type="text" name="username" value="{{ old('username') }}" required>
+                                <input id="username" type="text" name="username" value="{{ old('username') }}" placeholder="yourhandle" required>
                                 @error('username') <span class="form-error">{{ $message }}</span> @enderror
                             </div>
                         </div>
 
                         <div class="form-field">
                             <label for="email">Email</label>
-                            <input id="email" type="email" name="email" value="{{ old('email') }}" required>
+                            <input id="email" type="email" name="email" value="{{ old('email') }}" placeholder="you@example.com" required>
                             @error('email') <span class="form-error">{{ $message }}</span> @enderror
                         </div>
 
@@ -45,7 +41,6 @@
                                 <label class="role-option">
                                     <input type="radio" name="role" value="maker" @checked(old('role') === 'maker')>
                                     <span class="role-option__body">
-                                        <span class="role-option__icon"><i data-lucide="hammer"></i></span>
                                         <strong>Maker</strong>
                                         <small>I build and launch products.</small>
                                     </span>
@@ -53,7 +48,6 @@
                                 <label class="role-option">
                                     <input type="radio" name="role" value="hunter" @checked(old('role', 'hunter') === 'hunter')>
                                     <span class="role-option__body">
-                                        <span class="role-option__icon"><i data-lucide="search"></i></span>
                                         <strong>Hunter</strong>
                                         <small>I discover and upvote products.</small>
                                     </span>
@@ -65,13 +59,13 @@
                         <div class="form-row">
                             <div class="form-field">
                                 <label for="password">Password</label>
-                                <input id="password" type="password" name="password" required autocomplete="new-password">
+                                <input id="password" type="password" name="password" placeholder="8+ characters" required autocomplete="new-password">
                                 @error('password') <span class="form-error">{{ $message }}</span> @enderror
                             </div>
 
                             <div class="form-field">
                                 <label for="password_confirmation">Confirm password</label>
-                                <input id="password_confirmation" type="password" name="password_confirmation" required autocomplete="new-password">
+                                <input id="password_confirmation" type="password" name="password_confirmation" placeholder="Repeat password" required autocomplete="new-password">
                             </div>
                         </div>
 
@@ -90,6 +84,10 @@
             </div>
 
             <aside class="auth-split__promo" aria-hidden="true">
+                <div class="auth-split__brand auth-split__brand--light">
+                    <i data-lucide="rocket"></i> LaunchPad
+                </div>
+
                 <h2 class="auth-split__promo-title">Ship it. Share it. Let the community decide.</h2>
                 <p class="auth-split__promo-sub">Create an account to launch products, build in public, and earn badges.</p>
 

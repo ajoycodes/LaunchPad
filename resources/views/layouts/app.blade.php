@@ -15,9 +15,9 @@
     {{-- Bootstrap 5 (CDN) --}}
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
 
-    {{-- Design tokens + app styles --}}
-    <link href="{{ asset('css/tokens.css') }}" rel="stylesheet">
-    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    {{-- Design tokens + app styles (mtime query busts stale browser caches) --}}
+    <link href="{{ asset('css/tokens.css') }}?v={{ filemtime(public_path('css/tokens.css')) }}" rel="stylesheet">
+    <link href="{{ asset('css/app.css') }}?v={{ filemtime(public_path('css/app.css')) }}" rel="stylesheet">
 
     @stack('head')
 </head>
@@ -32,7 +32,11 @@
         @yield('content')
     </main>
 
-    @include('partials.footer')
+    {{-- Auth pages set hide-footer so the form fits one viewport --}}
+    @hasSection('hide-footer')
+    @else
+        @include('partials.footer')
+    @endif
 
     {{-- Bootstrap 5 JS bundle (CDN) --}}
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>

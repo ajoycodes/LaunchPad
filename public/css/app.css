@@ -479,6 +479,53 @@ a:hover {
   margin: 0 0 var(--space-6);
 }
 
+/* Simple centered card for secondary auth pages (password reset, email
+   verification, password confirm) that don't need the full split promo. */
+.auth-simple {
+  display: flex;
+  justify-content: center;
+  padding-block: var(--space-8);
+}
+
+.auth-simple__card {
+  width: 100%;
+  max-width: 440px;
+  background: var(--color-bg);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-lg);
+  padding: var(--space-7) var(--space-6);
+}
+
+.auth-simple__brand {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  font-weight: var(--weight-bold);
+  font-size: var(--text-md);
+  color: var(--color-text-primary);
+  margin-bottom: var(--space-5);
+}
+
+.auth-simple__brand .lucide {
+  color: var(--color-accent);
+}
+
+.auth-simple__text {
+  font-size: var(--text-sm);
+  color: var(--color-text-muted);
+  line-height: var(--leading-relaxed);
+  margin: 0 0 var(--space-5);
+}
+
+.auth-simple__row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-3);
+  margin-top: var(--space-5);
+}
+
 /* Miniature product-feed mock inside the promo panel */
 .auth-promo-mock {
   display: flex;
@@ -685,6 +732,22 @@ textarea::placeholder {
   font-size: .9rem;
   color: var(--color-text-body);
   cursor: pointer;
+}
+
+.auth-form__row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-3);
+}
+
+.auth-form__forgot {
+  font-size: var(--text-sm);
+  color: var(--color-text-muted);
+}
+
+.auth-form__forgot:hover {
+  color: var(--color-accent);
 }
 
 .auth-form__submit {
@@ -2412,6 +2475,42 @@ a.comment__author:hover {
   border: 1px solid #FECDD3;
 }
 
+.alert-warning {
+  background: #FFFBEB;
+  color: #92400E;
+  border: 1px solid #FDE68A;
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  flex-wrap: wrap;
+}
+
+.btn-link-inline {
+  background: none;
+  border: none;
+  padding: 0;
+  font: inherit;
+  font-weight: var(--weight-semibold);
+  color: var(--color-accent);
+  cursor: pointer;
+  text-decoration: underline;
+}
+
+/* Danger zone at the bottom of a settings form */
+.form-section--danger .form-section__title {
+  color: var(--color-danger);
+}
+
+.form-row-inline {
+  display: flex;
+  gap: var(--space-3);
+  margin-top: var(--space-3);
+}
+
+.form-row-inline .form-control {
+  flex: 1;
+}
+
 /* ==========================================================================
    Avatar upload widget
    ========================================================================== */
@@ -3903,6 +4002,13 @@ img {
   margin-bottom: var(--space-6);
   padding-bottom: var(--space-5);
   border-bottom: 1px solid var(--color-border);
+}
+
+/* Separates stacked forms on the same settings page (profile / password / danger zone) */
+.form-page__header--divider {
+  margin-top: var(--space-7);
+  padding-top: var(--space-6);
+  border-top: 1px solid var(--color-border);
 }
 .form-page__title {
   margin: 0;

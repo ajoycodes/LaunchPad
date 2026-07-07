@@ -2,18 +2,26 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
-use Illuminate\Validation\Rule;
+use Illuminate\View\View;
 
 class ProfileController extends Controller
 {
-    public function edit(Request $request)
+    /**
+     * Display the user's profile form.
+     */
+    public function edit(Request $request): View
     {
         return view('profile.edit', ['user' => $request->user()]);
     }
 
-    public function update(Request $request)
+    /**
+     * Update the user's profile information.
+     */
+    public function update(Request $request): RedirectResponse
     {
         $user = $request->user();
 
@@ -37,5 +45,30 @@ class ProfileController extends Controller
         $user->update($data);
 
         return redirect()->route('profile.edit')->with('success', 'Profile updated.');
+    }
+
+    /**
+     * Delete the user's own account after confirming their password.
+     */
+    public function destroy(Request $request): RedirectResponse
+    {
+        $request->validateWithBag('userDeletion', [
+            'password' => ['required', 'current_password'],
+        ]);
+
+        $user = $request->user();
+
+        if ($user->avatar) {
+            Storage::disk('public')->delete($user->avatar);
+        }
+
+        Auth::logout();
+
+        $user->delete();
+
+        $request->session()->invalidate();
+        $request->session()->regenerateToken();
+
+        return redirect()->route('home')->with('success', 'Your account has been deleted.');
     }
 }

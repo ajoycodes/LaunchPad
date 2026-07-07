@@ -27,10 +27,15 @@
                             @error('password') <span class="form-error">{{ $message }}</span> @enderror
                         </div>
 
-                        <label class="form-check-inline">
-                            <input type="checkbox" name="remember">
-                            <span>Remember me</span>
-                        </label>
+                        <div class="auth-form__row">
+                            <label class="form-check-inline">
+                                <input type="checkbox" name="remember">
+                                <span>Remember me</span>
+                            </label>
+                            @if (Route::has('password.request'))
+                                <a href="{{ route('password.request') }}" class="auth-form__forgot">Forgot your password?</a>
+                            @endif
+                        </div>
 
                         <button type="submit" class="btn-accent auth-form__submit">Log in</button>
                     </form>

@@ -5,8 +5,6 @@ use App\Http\Controllers\Admin\AdminCategoryController;
 use App\Http\Controllers\Admin\AdminDashboardController;
 use App\Http\Controllers\Admin\AdminProductController;
 use App\Http\Controllers\Admin\AdminUserController;
-use App\Http\Controllers\Auth\AuthenticatedSessionController;
-use App\Http\Controllers\Auth\RegisteredUserController;
 use App\Http\Controllers\BattleController;
 use App\Http\Controllers\CollectionController;
 use App\Http\Controllers\CommentController;
@@ -23,21 +21,16 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
 
-Route::middleware('guest')->group(function () {
-    Route::get('/register', [RegisteredUserController::class, 'create'])->name('register');
-    Route::post('/register', [RegisteredUserController::class, 'store']);
-
-    Route::get('/login', [AuthenticatedSessionController::class, 'create'])->name('login');
-    Route::post('/login', [AuthenticatedSessionController::class, 'store']);
-});
+// Login, registration, logout, password reset, and email verification
+// all live in routes/auth.php (Laravel Breeze's convention).
 
 Route::middleware('auth')->group(function () {
-    Route::post('/logout', [AuthenticatedSessionController::class, 'destroy'])->name('logout');
     Route::post('/upvote/{product}', [UpvoteController::class, 'toggle'])->name('upvote.toggle');
     Route::post('/products/{product}/comments', [CommentController::class, 'store'])->name('comments.store');
     Route::delete('/comments/{comment}', [CommentController::class, 'destroy'])->name('comments.destroy');
     Route::get('/settings/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::put('/settings/profile', [ProfileController::class, 'update'])->name('profile.update');
+    Route::delete('/settings/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
     Route::post('/dashboard/updates', [ProductUpdateController::class, 'store'])->name('dashboard.updates.store');
     Route::get('/notifications', [NotificationController::class, 'index'])->name('notifications');
@@ -62,7 +55,8 @@ Route::middleware('auth')->group(function () {
     Route::delete('/collections/{collection}', [CollectionController::class, 'destroy'])->name('collections.destroy');
 });
 
-Route::middleware(['auth', 'maker'])->group(function () {
+// Verified: makers must confirm their email before publishing content.
+Route::middleware(['auth', 'verified', 'role:maker'])->group(function () {
     Route::get('/submit', [ProductController::class, 'create'])->name('products.create');
     Route::post('/submit', [ProductController::class, 'store'])->name('products.store');
     Route::get('/products/{product:slug}/edit', [ProductController::class, 'edit'])->name('products.edit');
@@ -70,7 +64,7 @@ Route::middleware(['auth', 'maker'])->group(function () {
     Route::delete('/products/{product:slug}', [ProductController::class, 'destroy'])->name('products.destroy');
 });
 
-Route::middleware(['auth', 'admin'])->prefix('admin')->name('admin.')->group(function () {
+Route::middleware(['auth', 'role:admin'])->prefix('admin')->name('admin.')->group(function () {
     Route::get('/', [AdminDashboardController::class, 'index'])->name('dashboard');
     Route::get('/products', [AdminProductController::class, 'index'])->name('products');
     Route::post('/products/{product}/approve', [AdminProductController::class, 'approve'])->name('products.approve');
@@ -88,3 +82,5 @@ Route::middleware(['auth', 'admin'])->prefix('admin')->name('admin.')->group(fun
     Route::get('/battles/create', [AdminBattleController::class, 'create'])->name('battles.create');
     Route::post('/battles', [AdminBattleController::class, 'store'])->name('battles.store');
 });
+
+require __DIR__.'/auth.php';

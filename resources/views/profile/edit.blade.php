@@ -14,6 +14,19 @@
             <div class="alert alert-success">{{ session('success') }}</div>
         @endif
 
+        @if(! $user->hasVerifiedEmail())
+            <div class="alert alert-warning">
+                Your email address is unverified.
+                <form method="POST" action="{{ route('verification.send') }}" class="d-inline">
+                    @csrf
+                    <button type="submit" class="btn-link-inline">Resend verification email</button>
+                </form>
+                @if(session('status') === 'verification-link-sent')
+                    <span class="text-muted">A new link has been sent to your email address.</span>
+                @endif
+            </div>
+        @endif
+
         <form method="POST" action="{{ route('profile.update') }}" enctype="multipart/form-data" class="submit-form">
             @csrf
             @method('PUT')
@@ -107,6 +120,60 @@
             </div>
 
         </form>
+
+        <div class="form-page__header form-page__header--divider">
+            <h2>Change Password</h2>
+            <p class="form-page__sub">Use a long, random password to keep your account secure.</p>
+        </div>
+
+        <form method="POST" action="{{ route('password.update') }}" class="submit-form">
+            @csrf
+            @method('PUT')
+
+            <div class="form-group">
+                <label for="current_password" class="form-label">Current password</label>
+                <input type="password" id="current_password" name="current_password"
+                       class="form-control @error('current_password', 'updatePassword') is-invalid @enderror"
+                       autocomplete="current-password">
+                @error('current_password', 'updatePassword')<span class="form-error">{{ $message }}</span>@enderror
+            </div>
+
+            <div class="form-group">
+                <label for="new_password" class="form-label">New password</label>
+                <input type="password" id="new_password" name="password"
+                       class="form-control @error('password', 'updatePassword') is-invalid @enderror"
+                       autocomplete="new-password">
+                @error('password', 'updatePassword')<span class="form-error">{{ $message }}</span>@enderror
+            </div>
+
+            <div class="form-group">
+                <label for="new_password_confirmation" class="form-label">Confirm new password</label>
+                <input type="password" id="new_password_confirmation" name="password_confirmation"
+                       class="form-control" autocomplete="new-password">
+            </div>
+
+            <div class="form-actions">
+                <button type="submit" class="btn-accent">Update password</button>
+            </div>
+        </form>
+
+        <div class="form-section form-section--danger">
+            <h2 class="form-section__title">Danger Zone</h2>
+            <p class="form-hint">Deleting your account removes your profile, products, and activity. This cannot be undone.</p>
+
+            <form method="POST" action="{{ route('profile.destroy') }}" class="form-row-inline">
+                @csrf
+                @method('DELETE')
+
+                <input type="password" name="password" placeholder="Confirm your password"
+                       class="form-control" required>
+                <button type="submit" class="btn-danger"
+                        onclick="return confirm('Delete your account permanently? This cannot be undone.')">
+                    Delete account
+                </button>
+            </form>
+            @error('password', 'userDeletion')<span class="form-error">{{ $message }}</span>@enderror
+        </div>
     </div>
 </div>
 @endsection

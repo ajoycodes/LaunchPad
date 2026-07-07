@@ -48,18 +48,22 @@ class HomeController extends Controller
             ->latest()
             ->first();
 
-        $popularTags = Tag::withCount('products')
-            ->having('products_count', '>', 0)
+        // has() + withCount() (rather than withCount()->having()) keeps this
+        // portable: SQLite rejects a HAVING clause with no GROUP BY or
+        // top-level aggregate, which withCount()'s subquery column isn't.
+        $popularTags = Tag::has('products')
+            ->withCount('products')
             ->orderByDesc('products_count')
             ->limit(10)
             ->get();
 
+        $recentMakerProducts = fn ($q) => $q
+            ->where('status', 'approved')
+            ->where('launch_date', '>=', now()->subDays(7));
+
         $topMakers = User::where('role', 'maker')
-            ->withCount(['products' => fn ($q) => $q
-                ->where('status', 'approved')
-                ->where('launch_date', '>=', now()->subDays(7))
-            ])
-            ->having('products_count', '>', 0)
+            ->whereHas('products', $recentMakerProducts)
+            ->withCount(['products' => $recentMakerProducts])
             ->orderByDesc('products_count')
             ->limit(5)
             ->get();

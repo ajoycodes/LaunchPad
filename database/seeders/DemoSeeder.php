@@ -24,11 +24,12 @@ class DemoSeeder extends Seeder
         User::updateOrCreate(
             ['email' => 'admin@launchpad.test'],
             [
-                'name'     => 'Admin User',
-                'username' => 'admin',
-                'password' => Hash::make('password'),
-                'role'     => 'admin',
-                'bio'      => 'Platform administrator.',
+                'name'              => 'Admin User',
+                'username'          => 'admin',
+                'password'          => Hash::make('password'),
+                'role'              => 'admin',
+                'bio'               => 'Platform administrator.',
+                'email_verified_at' => now(),
             ]
         );
 
@@ -50,7 +51,11 @@ class DemoSeeder extends Seeder
         foreach ($makerData as $md) {
             $makers[] = User::updateOrCreate(
                 ['email' => $md['email']],
-                array_merge($md, ['password' => Hash::make('password'), 'role' => 'maker'])
+                array_merge($md, [
+                    'password'          => Hash::make('password'),
+                    'role'              => 'maker',
+                    'email_verified_at' => now(),
+                ])
             );
         }
 
@@ -62,10 +67,11 @@ class DemoSeeder extends Seeder
             $hunters[] = User::updateOrCreate(
                 ['email' => $username . '@launchpad.test'],
                 [
-                    'name'     => $fn . ' ' . chr(65 + ($i % 26)) . '.',
-                    'username' => $username,
-                    'password' => Hash::make('password'),
-                    'role'     => 'hunter',
+                    'name'              => $fn . ' ' . chr(65 + ($i % 26)) . '.',
+                    'username'          => $username,
+                    'password'          => Hash::make('password'),
+                    'role'              => 'hunter',
+                    'email_verified_at' => now(),
                 ]
             );
         }

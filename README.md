@@ -45,8 +45,15 @@ It's built with server-rendered Blade, a hand-rolled design system, and progress
 ### Operations
 - **Maker Dashboard** — upvote history, views per product, build-log updates, and product management
 - **Admin panel** — dark-sidebar layout to manage products, users, categories, and battles; ban/unban users and escalate roles
-- **Roles** — Admin, Maker, Hunter, enforced by route middleware
+- **Roles** — Admin, Maker, Hunter, enforced by a single parameterized `role:*` middleware
 - **Scheduled publishing** — products with a future launch date go live automatically
+
+### Auth & Accounts
+- **Laravel Breeze**-based authentication — session/cookie login, rate-limited (5 attempts, then a timed lockout)
+- **Email verification** — required before makers can submit products; resend link on the settings page
+- **Password reset** and **password confirmation** flows for sensitive actions
+- **Self-service account deletion**, password-confirmed
+- **Live notification badge** — the navbar bell polls a small JSON API over the existing session cookie, no page reload
 
 ---
 
@@ -57,10 +64,12 @@ It's built with server-rendered Blade, a hand-rolled design system, and progress
 | Framework | Laravel 12 |
 | Language | PHP 8.2+ |
 | Database | MySQL 8+ |
+| Auth | Laravel Breeze (Blade stack) + Laravel Sanctum (stateful, cookie-based API auth) |
 | Templating | Blade (server-rendered) |
 | Styling | Custom CSS design system + Bootstrap 5 (CDN, scaffolding only) |
 | Icons | [Lucide](https://lucide.dev) (no emoji icons) |
 | JavaScript | Vanilla JS (progressive enhancement — no build step) |
+| Testing | PHPUnit, SQLite in-memory test database |
 
 ---
 
@@ -136,10 +145,11 @@ Seeded by `DemoSeeder` (~60 users, ~45 products, plus comments, upvotes, battles
 
 ```
 app/
-├── Http/Controllers/        Request handling (Admin/ subdir for the panel)
-├── Http/Middleware/         AdminMiddleware, MakerMiddleware (aliased: admin, maker)
+├── Http/Controllers/        Request handling (Admin/ and Api/ subdirs)
+├── Http/Controllers/Auth/   Breeze-based login, registration, password & email verification
+├── Http/Middleware/         EnsureUserHasRole — one parameterized role:* gate for admin/maker
 ├── Models/                  13 Eloquent models + Concerns/ (shared traits)
-└── Console/Commands/        PublishScheduledProducts (products:publish)
+└── Console/Commands/        PublishScheduledProducts (products:publish), RefreshDemoData
 
 resources/views/
 ├── components/              Reusable Blade components (avatar, product-logo, product-card)
@@ -199,7 +209,9 @@ In production, point cron at Laravel's scheduler:
 | `php artisan db:seed` | Re-seed demo data |
 | `php artisan storage:link` | Symlink `storage/` for public uploads |
 | `php artisan products:publish` | Publish products whose launch date has arrived |
+| `php artisan demo:refresh` | Re-date the newest demo products to today, so the "Today" feed stays populated |
 | `php artisan serve` | Start the local dev server |
+| `php artisan test` | Run the test suite (isolated in-memory SQLite, defined in `phpunit.xml`) |
 
 ---
 
